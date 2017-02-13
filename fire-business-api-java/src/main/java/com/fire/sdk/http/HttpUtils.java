@@ -9,6 +9,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.entity.ContentType;
@@ -72,12 +73,17 @@ public class HttpUtils {
      * @param httpConfiguration
      * @return the xml response
      */
-    public static <T, U extends Response<U>> U sendMessage(Request<T, U> request, HttpClient httpClient, HttpConfiguration httpConfiguration) {
+    public static <T, U extends Response<U>> U sendPostMessage(Request<T, U> request, String accessToken, HttpClient httpClient, HttpConfiguration httpConfiguration) {
 
         logger.debug("Setting endpoint of: " + httpConfiguration.getEndpoint());
         Gson gson = new Gson();
         HttpPost httpPost = new HttpPost(httpConfiguration.getEndpoint() + "/" + request.getEndpoint());
         httpPost.addHeader(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType());
+        
+        if (accessToken != null) {
+            httpPost.addHeader(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken);
+        }
+        
         HttpResponse httpResponse = null;
 
         try {
@@ -113,5 +119,58 @@ public class HttpUtils {
                 }
             }
         }
+    }
+    
+    public static <T, U extends Response<U>> U sendGetMessage(Request<T, U> request, String accessToken, HttpClient httpClient, HttpConfiguration httpConfiguration) {
+
+        logger.debug("Setting endpoint of: " + httpConfiguration.getEndpoint());
+        Gson gson = new Gson();
+        HttpGet httpGet = new HttpGet(httpConfiguration.getEndpoint() + "/" + request.getEndpoint());
+        httpGet.addHeader(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType());
+        
+        if (accessToken != null) {
+            httpGet.addHeader(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken);
+        }
+        
+        HttpResponse httpResponse = null;
+
+        try {
+           
+            logger.debug("Executing HTTP Post message to: " + httpGet.getURI());
+            httpResponse = httpClient.execute(httpGet);
+
+            logger.debug("Checking the HTTP response status code.");
+            int statusCode = (httpResponse.getStatusLine().getStatusCode());
+            if (statusCode != HttpStatus.SC_OK && statusCode != HttpStatus.SC_ACCEPTED && statusCode != HttpStatus.SC_CREATED) {
+                throw new FireException("Unexpected http status code [" + statusCode + "]");
+            }
+
+            String jsonResponse = EntityUtils.toString(httpResponse.getEntity());
+            logger.debug("Converting HTTP entity (the json response) back into a string: {}", jsonResponse);
+            
+            EntityUtils.consume(httpResponse.getEntity());
+            return (U) gson.fromJson(jsonResponse, request.getResponseClass());
+            
+        } catch (IOException ioe) {
+            // Also catches ClientProtocolException (from httpClient.execute()) and UnsupportedEncodingException (from response.getEntity()
+            logger.error("Exception communicating with Fire.", ioe.getMessage());
+            throw new FireException("Exception communicating with Fire.", ioe);
+        } finally {
+            // Test if response Closeable
+            if (httpResponse instanceof Closeable) {
+                try {
+                    ((Closeable) httpResponse).close();
+                } catch (IOException ioe) {
+                    // Ignore
+                }
+            }
+        }
+    }
+    
+    public enum HttpMethod {
+        POST,
+        GET,
+        DELETE,
+        PUT
     }
 }

@@ -6,22 +6,22 @@ import org.slf4j.LoggerFactory;
 
 import com.fire.sdk.http.HttpConfiguration;
 import com.fire.sdk.http.HttpUtils;
+import com.fire.sdk.http.HttpUtils.HttpMethod;
 import com.fire.sdk.model.Credentials;
 import com.fire.sdk.model.Request;
 import com.fire.sdk.model.Response;
+import com.fire.sdk.model.request.AccessTokenRequest;
+import com.fire.sdk.model.response.AccessTokenResponse;
 
 public class FireBusinessAPI {
+    private String mAccessToken;
+    private Credentials mCredentials;
 
 	/**
 	 * Logger 
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(FireBusinessAPI.class);
 
-	/**
-	 * Credentials for the user
-	 */
-	private String accessToken;
-	
 	/**
 	 * HttpClient instance.
 	 */
@@ -82,6 +82,17 @@ public class FireBusinessAPI {
 		return this;
 	}
 
+	public FireBusinessAPI initialise(Credentials credentials) {
+	    this.mCredentials = credentials;
+	    
+	    AccessTokenRequest accessToken = new AccessTokenRequest().intialise(credentials);    
+	    AccessTokenResponse accessTokenResponse = this.send(accessToken);
+	    this.mAccessToken = accessTokenResponse.getAccessToken();
+	    
+	    return this;
+	    
+	}
+	
 	/**
 	 * <p>
 	 * Sends the request to Fire. Actions:
@@ -100,11 +111,17 @@ public class FireBusinessAPI {
 	 * @return Response
 	 */
 	public <T, U extends Response<U>> U send(Request<T, U> request) {
-
+	    U response = null;
+	    
 		LOGGER.info("Sending JSON request to Realex.");
 		//send request to Fire.
-		U response = HttpUtils.sendMessage(request, httpClient, httpConfiguration);
-
+		
+		if (request.getMethod() == HttpUtils.HttpMethod.POST) {
+		    response = HttpUtils.sendPostMessage(request, this.mAccessToken, httpClient, httpConfiguration);
+		} else if (request.getMethod() == HttpUtils.HttpMethod.GET) {
+            response = HttpUtils.sendGetMessage(request, this.mAccessToken, httpClient, httpConfiguration);
+        } 
+		
 		return response;
 	}
 

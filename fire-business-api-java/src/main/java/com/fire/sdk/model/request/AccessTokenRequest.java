@@ -4,6 +4,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fire.sdk.http.HttpUtils;
 import com.fire.sdk.model.Credentials;
 import com.fire.sdk.model.Request;
 import com.fire.sdk.model.response.AccessTokenResponse;
@@ -19,6 +20,10 @@ public class AccessTokenRequest implements Request<AccessTokenRequest, AccessTok
 
 	public String getEndpoint() {
 		return "apps/accesstokens";
+	}
+	
+	public HttpUtils.HttpMethod getMethod() {
+	    return HttpUtils.HttpMethod.POST;
 	}
 	
 	public Class<AccessTokenResponse> getResponseClass() {
