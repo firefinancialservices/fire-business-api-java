@@ -10,9 +10,11 @@ import com.fire.sdk.model.Credentials;
 import com.fire.sdk.model.request.AccountListRequest;
 import com.fire.sdk.model.request.AccountRequest;
 import com.fire.sdk.model.request.AccountTransactionListRequest;
+import com.fire.sdk.model.request.TransactionRequest;
 import com.fire.sdk.model.response.AccountListResponse;
 import com.fire.sdk.model.response.AccountResponse;
 import com.fire.sdk.model.response.AccountTransactionListResponse;
+import com.fire.sdk.model.response.TransactionResponse;
 
 public class FireBusinessAPITest {
 
@@ -41,14 +43,16 @@ public class FireBusinessAPITest {
 		logger.debug("ClientId {}", prop.getProperty("clientId"));
 		FireBusinessAPI api = new FireBusinessAPI().initialise(credentials);  
 		
-		AccountListResponse accountList = api.send(new AccountListRequest());
-		Long accountId = accountList.getAccounts().get(0).getIcan();
-		AccountResponse account = api.send(new AccountRequest().setAccountId(accountId));
-		
-        logger.info("Account details: {}, {} / {}", account.getName(), account.getCbic(), account.getCiban());
-		
-        AccountTransactionListResponse transactions = api.send(new AccountTransactionListRequest().setAccountId(accountId).setOffset(4).setLimit(2));
-        logger.info("Transaction 0 details: {}", transactions.getTransactions().get(0).getType());
+//		AccountListResponse accountList = api.send(new AccountListRequest());
+//		Long accountId = accountList.getAccounts().get(0).getIcan();
+//		AccountResponse account = api.send(new AccountRequest().setAccountId(accountId));
+//		
+//        logger.info("Account details: {}, {} / {}", account.getName(), account.getCbic(), account.getCiban());
+//		
+//        AccountTransactionListResponse transactions = api.send(new AccountTransactionListRequest().setAccountId(accountId));
+//        logger.info("Transaction 0 details: {}", transactions.getTransactions().get(0).getType());
+        
+        TransactionResponse transaction = api.send(new TransactionRequest().setTransactionId(203162l));
         
 		
 	}
