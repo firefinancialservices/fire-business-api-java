@@ -34,8 +34,6 @@ import com.google.gson.Gson;
  */
 public class HttpUtils {
 
-    private final static String HTTPS_PROTOCOL = "https";
-
     private final static Logger logger = LoggerFactory.getLogger(HttpUtils.class);
 
     /**
@@ -146,7 +144,7 @@ public class HttpUtils {
             }
 
             String jsonResponse = EntityUtils.toString(httpResponse.getEntity());
-            logger.debug("Converting HTTP entity (the json response) back into a string: {}", jsonResponse);
+            logger.info("Converting HTTP entity (the json response) back into a string: {}", jsonResponse);
             
             EntityUtils.consume(httpResponse.getEntity());
             return (U) gson.fromJson(jsonResponse, request.getResponseClass());

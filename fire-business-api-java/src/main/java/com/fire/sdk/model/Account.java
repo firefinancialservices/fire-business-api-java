@@ -1,17 +1,17 @@
 package com.fire.sdk.model;
 
 public class Account {
-    public Long ican;
-    public String name;
-    public Long balance;
-    public String ciban;
-    public String cbic;
-    public String cnsc;
-    public String ccan;
-    public Currency currency;
-    public boolean defaultAccount;
-    public String status;
-    public String colour;
+    private Long ican;
+    private String name;
+    private Long balance;
+    private String ciban;
+    private String cbic;
+    private String cnsc;
+    private String ccan;
+    private Currency currency;
+    private boolean defaultAccount;
+    private String status;
+    private String colour;
     
     public Long getIcan() {
         return ican;

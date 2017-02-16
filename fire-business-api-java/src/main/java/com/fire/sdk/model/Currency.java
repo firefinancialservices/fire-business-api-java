@@ -1,8 +1,8 @@
 package com.fire.sdk.model;
 
 public class Currency {
-    public String description;
-    public String code;
+	private String description;
+    private String code;
     
     public String getDescription() {
         return description;

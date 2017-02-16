@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 
 import com.fire.sdk.http.HttpConfiguration;
 import com.fire.sdk.http.HttpUtils;
-import com.fire.sdk.http.HttpUtils.HttpMethod;
 import com.fire.sdk.model.Credentials;
 import com.fire.sdk.model.Request;
 import com.fire.sdk.model.Response;
@@ -85,7 +84,7 @@ public class FireBusinessAPI {
 	public FireBusinessAPI initialise(Credentials credentials) {
 	    this.mCredentials = credentials;
 	    
-	    AccessTokenRequest accessToken = new AccessTokenRequest().intialise(credentials);    
+	    AccessTokenRequest accessToken = new AccessTokenRequest().intialise(mCredentials);    
 	    AccessTokenResponse accessTokenResponse = this.send(accessToken);
 	    this.mAccessToken = accessTokenResponse.getAccessToken();
 	    

@@ -7,13 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fire.sdk.model.Credentials;
-import com.fire.sdk.model.request.AccountListRequest;
-import com.fire.sdk.model.request.AccountRequest;
-import com.fire.sdk.model.request.AccountTransactionListRequest;
 import com.fire.sdk.model.request.TransactionRequest;
-import com.fire.sdk.model.response.AccountListResponse;
-import com.fire.sdk.model.response.AccountResponse;
-import com.fire.sdk.model.response.AccountTransactionListResponse;
 import com.fire.sdk.model.response.TransactionResponse;
 
 public class FireBusinessAPITest {
