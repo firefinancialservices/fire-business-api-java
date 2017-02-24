@@ -1,6 +1,7 @@
 package com.fire.sdk.model.request;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,8 @@ public class AccountTransactionListRequest implements Request<AccountTransaction
 	private Long accountId;
     private int limit;
     private int offset;
+    private Date dateRangeFrom;
+    private Date dateRangeTo;
     
     public String getEndpoint() {
         ArrayList<String> queryStrings = new ArrayList<String>();
@@ -23,6 +26,14 @@ public class AccountTransactionListRequest implements Request<AccountTransaction
         
         if (getAccountId() == null) {
             throw new FireException("You must setAccountId() first!");
+        }
+        
+        if (getDateRangeFrom() != null) {
+            queryStrings.add("dateRangeFrom=" + getDateRangeFrom().getTime());
+        }
+        
+        if (getDateRangeTo() != null) {
+            queryStrings.add("dateRangeTo=" + getDateRangeTo().getTime());
         }
         
         if (getLimit() != 0) {
@@ -44,7 +55,11 @@ public class AccountTransactionListRequest implements Request<AccountTransaction
             queryString = "?" + sb.substring(0, end);
         }
         
-        return "accounts/" + getAccountId() + "/transactions" + queryString;
+        if (getDateRangeFrom() != null || getDateRangeTo() != null) {
+            return "accounts/" + getAccountId() + "/transactions/filter" + queryString;
+        } else {
+            return "accounts/" + getAccountId() + "/transactions" + queryString;
+        }
     }
     
     public HttpUtils.HttpMethod getMethod() {
@@ -79,6 +94,24 @@ public class AccountTransactionListRequest implements Request<AccountTransaction
 
     public AccountTransactionListRequest setOffset(int offset) {
         this.offset = offset;
+        return this;
+    }
+
+    public Date getDateRangeFrom() {
+        return dateRangeFrom;
+    }
+
+    public AccountTransactionListRequest setDateRangeFrom(Date dateRangeFrom) {
+        this.dateRangeFrom = dateRangeFrom;
+        return this;
+    }
+
+    public Date getDateRangeTo() {
+        return dateRangeTo;
+    }
+
+    public AccountTransactionListRequest setDateRangeTo(Date dateRangeTo) {
+        this.dateRangeTo = dateRangeTo;
         return this;
     }
         
