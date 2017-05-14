@@ -94,25 +94,15 @@ public class FireBusinessAPI {
 	
 	/**
 	 * <p>
-	 * Sends the request to Fire. Actions:
-	 * 
-	 * <ol>
-	 * <li>Generates any defaults on the request e.g. hash, time stamp order ID.</li>
-	 * <li>Marshals request to XML.</li>
-	 * <li>Sends request to Realex.</li>
-	 * <li>Unmarshals response.</li>
-	 * <li>Checks result code (If response is an error then throws {@link RealexServerException}).</li>
-	 * <li>Validates response hash (If invalid throws {@link RealexException}).</li>
-	 * </ol>
-	 * </p>
-	 * 
+	 * Sends the request to Fire. 
+	 *  
 	 * @param request
 	 * @return Response
 	 */
 	public <T, U extends Response<U>> U send(Request<T, U> request) {
 	    U response = null;
 	    
-		LOGGER.info("Sending JSON request to Realex.");
+		LOGGER.info("Sending JSON request to Fire.");
 		//send request to Fire.
 		
 		if (request.getMethod() == HttpUtils.HttpMethod.POST) {
