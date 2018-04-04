@@ -12,8 +12,10 @@ import org.slf4j.LoggerFactory;
 import com.fire.sdk.model.Credentials;
 import com.fire.sdk.model.request.AccountListRequest;
 import com.fire.sdk.model.request.AccountTransactionListRequest;
+import com.fire.sdk.model.request.ActivitiesListRequest;
 import com.fire.sdk.model.response.AccountListResponse;
 import com.fire.sdk.model.response.AccountTransactionListResponse;
+import com.fire.sdk.model.response.ActivitiesListResponse;
 
 public class FireBusinessAPITest {
 
@@ -41,6 +43,9 @@ public class FireBusinessAPITest {
 				
 		logger.debug("ClientId {}", prop.getProperty("clientId"));
 		FireBusinessAPI api = new FireBusinessAPI().initialise(credentials);  
+		
+		ActivitiesListResponse activitiesList = api.send(new ActivitiesListRequest());
+		logger.info("Activity 0 = {}", activitiesList.getActivities().get(0).getDescription());
 		
 		AccountListResponse accountList = api.send(new AccountListRequest());
 		Long accountId = accountList.getAccounts().get(0).getIcan();
