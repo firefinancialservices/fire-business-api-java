@@ -12,4 +12,5 @@ public interface Request<T, U extends Response<U>> {
 	public String getEndpoint();
 	public HttpUtils.HttpMethod getMethod();
 	public Class<U> getResponseClass();
+	public Object getBody();
 }

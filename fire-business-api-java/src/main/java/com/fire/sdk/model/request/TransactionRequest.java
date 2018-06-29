@@ -37,6 +37,12 @@ public class TransactionRequest implements Request<TransactionRequest, Transacti
         this.transactionId = transactionId;
         return this;
     }
+
+    @Override
+    public Object getBody() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 	
 
 }

@@ -107,6 +107,8 @@ public class FireBusinessAPI {
 		
 		if (request.getMethod() == HttpUtils.HttpMethod.POST) {
 		    response = HttpUtils.sendPostMessage(request, this.mAccessToken, httpClient, httpConfiguration);
+		} else if (request.getMethod() == HttpUtils.HttpMethod.PUT) {
+            response = HttpUtils.sendPutMessage(request, this.mAccessToken, httpClient, httpConfiguration);
 		} else if (request.getMethod() == HttpUtils.HttpMethod.GET) {
             response = HttpUtils.sendGetMessage(request, this.mAccessToken, httpClient, httpConfiguration);
         } 

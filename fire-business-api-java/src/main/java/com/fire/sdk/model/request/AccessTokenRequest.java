@@ -81,6 +81,12 @@ public class AccessTokenRequest implements Request<AccessTokenRequest, AccessTok
 		
 		
 	}
+
+    @Override
+    public AccessTokenRequest getBody() {
+        // TODO Auto-generated method stub
+        return this;
+    }
 	
 
 }

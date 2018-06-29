@@ -37,6 +37,12 @@ public class AccountRequest implements Request<AccountRequest, AccountResponse> 
         this.accountId = accountId;
         return this;
     }
+
+    @Override
+    public Object getBody() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 	
 
 }

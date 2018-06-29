@@ -114,6 +114,12 @@ public class AccountTransactionListRequest implements Request<AccountTransaction
         this.dateRangeTo = dateRangeTo;
         return this;
     }
+
+    @Override
+    public Object getBody() {
+        // TODO Auto-generated method stub
+        return null;
+    }
         
 
 

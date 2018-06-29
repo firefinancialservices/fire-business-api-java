@@ -22,6 +22,12 @@ public class ActivitiesListRequest implements Request<ActivitiesListRequest, Act
 	public Class<ActivitiesListResponse> getResponseClass() {
 		return ActivitiesListResponse.class;
 	}
+
+    @Override
+    public Object getBody() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 	
 
 }
