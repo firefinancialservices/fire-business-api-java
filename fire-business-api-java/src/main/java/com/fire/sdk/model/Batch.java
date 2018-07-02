@@ -22,7 +22,7 @@ public class Batch {
     private Date dateCreated;
     
     public enum BatchType {
-        INTERNAL_TRANSFERS, BANK_TRANSFERS, NEW_PAYEES
+        INTERNAL_TRANSFER, BANK_TRANSFER, NEW_PAYEE
     }
     
     public String getBatchUuid() {
@@ -36,8 +36,9 @@ public class Batch {
     public BatchType getType() {
         return type;
     }
-    public void setType(BatchType type) {
+    public Batch setType(BatchType type) {
         this.type = type;
+        return this;
     }
     public String getStatus() {
         return status;

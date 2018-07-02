@@ -73,8 +73,6 @@ public class HttpUtils {
      * @return the xml response
      */
     public static <T, U extends Response<U>> U sendPostMessage(Request<T, U> request, String accessToken, HttpClient httpClient, HttpConfiguration httpConfiguration) {
-
-        logger.info("Setting endpoint of: " + httpConfiguration.getEndpoint());
         Gson gson = new Gson();
         HttpPost httpPost = new HttpPost(httpConfiguration.getEndpoint() + "/" + request.getEndpoint());
         httpPost.addHeader(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType());
@@ -138,8 +136,6 @@ public class HttpUtils {
      * @return the xml response
      */
     public static <T, U extends Response<U>> U sendPutMessage(Request<T, U> request, String accessToken, HttpClient httpClient, HttpConfiguration httpConfiguration) {
-
-        logger.info("Setting endpoint of: " + httpConfiguration.getEndpoint());
         Gson gson = new Gson();
         HttpPut httpPut = new HttpPut(httpConfiguration.getEndpoint() + "/" + request.getEndpoint());
         httpPut.addHeader(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType());
@@ -191,8 +187,6 @@ public class HttpUtils {
     }
     
     public static <T, U extends Response<U>> U sendGetMessage(Request<T, U> request, String accessToken, HttpClient httpClient, HttpConfiguration httpConfiguration) {
-
-        logger.debug("Setting endpoint of: " + httpConfiguration.getEndpoint());
         Gson gson = new Gson();
         HttpGet httpGet = new HttpGet(httpConfiguration.getEndpoint() + "/" + request.getEndpoint());
         httpGet.addHeader(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType());

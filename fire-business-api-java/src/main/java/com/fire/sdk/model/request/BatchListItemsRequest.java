@@ -36,15 +36,15 @@ public class BatchListItemsRequest implements Request<BatchListItemsRequest, Bat
 		String endpoint = "batches/" + this.batchUuid + "/";
 		
 		switch(batchType) {
-		case BANK_TRANSFERS:
+		case BANK_TRANSFER:
 		    endpoint += "banktransfers";
 		    break;
 		    
-		case INTERNAL_TRANSFERS:
+		case INTERNAL_TRANSFER:
 		    endpoint += "internaltransfers";
 		    break;
 		    
-		case NEW_PAYEES:
+		case NEW_PAYEE:
 		    endpoint += "newpayees";
 		    break;
 		    
