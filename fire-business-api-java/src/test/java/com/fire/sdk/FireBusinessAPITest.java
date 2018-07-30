@@ -1,28 +1,24 @@
 package com.fire.sdk;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fire.sdk.http.HttpConfiguration;
-import com.fire.sdk.model.BankTransfer;
-import com.fire.sdk.model.BankTransfer.PayeeType;
-import com.fire.sdk.model.Batch;
 import com.fire.sdk.model.Credentials;
-import com.fire.sdk.model.InternalTransfer;
+import com.fire.sdk.model.request.AccountListRequest;
+import com.fire.sdk.model.request.AccountRequest;
+import com.fire.sdk.model.request.AccountTransactionListRequest;
 import com.fire.sdk.model.request.ActivitiesListRequest;
-import com.fire.sdk.model.request.BatchAddItemRequest;
-import com.fire.sdk.model.request.BatchListItemsRequest;
-import com.fire.sdk.model.request.BatchListRequest;
-import com.fire.sdk.model.request.BatchNewRequest;
-import com.fire.sdk.model.request.BatchSubmitRequest;
+import com.fire.sdk.model.response.AccountListResponse;
+import com.fire.sdk.model.response.AccountResponse;
+import com.fire.sdk.model.response.AccountTransactionListResponse;
 import com.fire.sdk.model.response.ActivitiesListResponse;
-import com.fire.sdk.model.response.BatchAddItemResponse;
-import com.fire.sdk.model.response.BatchListItemsResponse;
-import com.fire.sdk.model.response.BatchListResponse;
-import com.fire.sdk.model.response.BatchNewResponse;
 
 public class FireBusinessAPITest {
 
@@ -51,16 +47,22 @@ public class FireBusinessAPITest {
 		logger.debug("ClientId {}", prop.getProperty("clientId"));
 		
 		HttpConfiguration config = new HttpConfiguration();
-		config.setEndpoint("https://api-preprod.fire.com/business/v1");
+//		config.setEndpoint("https://api-preprod.fire.com/business/v1");
 		
 		FireBusinessAPI api = new FireBusinessAPI(config).initialise(credentials);
+
 		
+	
+        // Activities
+        
 		ActivitiesListResponse activities = api.send(new ActivitiesListRequest());
 		
 		for (int i=0; i<10; i++) {
 		    logger.info("{}: {}", String.format("%-35s", activities.getActivities().get(i).getType()), activities.getActivities().get(i).getDescription());
 		}
         
+		
+		
 //		BatchListResponse batches = api.send(new BatchListRequest());
 //		logger.info("Batch 0 = {}", batches.getBatches().get(0).getBatchName());
 //		
@@ -103,22 +105,22 @@ public class FireBusinessAPITest {
 //		api.send(new BatchSubmitRequest().setBatchUuid(batchUuid));
 		
         
-/*		
+	
 		
-		ActivitiesListResponse activitiesList = api.send(new ActivitiesListRequest());
-		logger.info("Activity 0 = {}", activitiesList.getActivities().get(0).getDescription());
-		
+//		ActivitiesListResponse activitiesList = api.send(new ActivitiesListRequest());
+//		logger.info("Activity 0 = {}", activitiesList.getActivities().get(0).getDescription());
+//		
 		AccountListResponse accountList = api.send(new AccountListRequest());
 		Long accountId = accountList.getAccounts().get(0).getIcan();
-//		AccountResponse account = api.send(new AccountRequest().setAccountId(accountId));
+		AccountResponse account = api.send(new AccountRequest().setAccountId(accountId));
 //		
 //        logger.info("Account details: {}, {} / {}", account.getName(), account.getCbic(), account.getCiban());
-//		
+	
 		AccountTransactionListResponse transactions = null;
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			transactions = api.send(new AccountTransactionListRequest()
-					.setAccountId(accountId)
+					.setAccountId(2150l)
 					.setDateRangeFrom(df.parse("2017-05-01"))
 					.setDateRangeTo(df.parse("2017-06-01"))
 					);
@@ -130,6 +132,6 @@ public class FireBusinessAPITest {
         
 //        TransactionResponse transaction = api.send(new TransactionRequest().setTransactionId(203162l));
         
-	*/	
+
 	}
 }

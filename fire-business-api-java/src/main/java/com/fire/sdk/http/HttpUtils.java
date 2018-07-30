@@ -1,14 +1,22 @@
 package com.fire.sdk.http;
 
+import java.io.ByteArrayInputStream;
 import java.io.Closeable;
 import java.io.IOException;
 
 import org.apache.http.ConnectionReuseStrategy;
+import org.apache.http.Header;
+import org.apache.http.HttpEntityEnclosingRequest;
+import org.apache.http.HttpException;
 import org.apache.http.HttpHeaders;
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpResponseInterceptor;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
@@ -19,6 +27,7 @@ import org.apache.http.impl.NoConnectionReuseStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.BasicHttpClientConnectionManager;
+import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,11 +64,72 @@ public class HttpUtils {
         ConnectionReuseStrategy connectionResuseStrategy = new NoConnectionReuseStrategy();
 
         logger.debug("Creating HttpClient with simple no pooling/no connection reuse default settings.");
-        CloseableHttpClient httpClient = HttpClients.custom().setDefaultRequestConfig(requestConfig).setConnectionManager(connectionManager)
+        CloseableHttpClient httpClient = HttpClients.custom()
+                        .addInterceptorLast(createHttpRequestInterceptor())
+                        .addInterceptorLast(createHttpResponseInterceptor())
+                        .setDefaultRequestConfig(requestConfig)
+                        .setConnectionManager(connectionManager)
                 .setConnectionReuseStrategy(connectionResuseStrategy).build();
         return httpClient;
     }
 
+    
+    private static HttpRequestInterceptor createHttpRequestInterceptor() {
+        return new HttpRequestInterceptor() {
+            
+            @Override
+            public void process(HttpRequest request, HttpContext context) throws HttpException, IOException {
+                logger.info(">>>> REQUEST HEADERS >>>>");
+                logger.info(">  {}", request.getRequestLine());
+                for (Header header : request.getAllHeaders()) {
+                   logger.info(">  {}: {}", header.getName(), header.getValue()); 
+                }
+                logger.info("");
+                
+                
+                if(request instanceof HttpEntityEnclosingRequest) {
+                    org.apache.http.HttpEntity rqEntity = ((HttpEntityEnclosingRequest) request).getEntity();
+                    byte[] b = new byte[8192];
+                    ((ByteArrayInputStream)rqEntity.getContent()).read(b, 0, (int)rqEntity.getContentLength());
+                    logger.info(">>>> REQUEST CONTENT >>>>");
+                    logger.info(">  {}", new String(b).trim());
+                    logger.info("");
+                }
+                
+            }
+        };
+    }
+    
+    
+    private static HttpResponseInterceptor createHttpResponseInterceptor() {
+        return new HttpResponseInterceptor() {
+            
+            @Override
+            public void process(org.apache.http.HttpResponse response, HttpContext context) throws HttpException, IOException {
+                
+                logger.info("<<<< RESPONSE HEADERS <<<<");
+                logger.info("<  {}", response.getStatusLine());
+                for (Header header : response.getAllHeaders()) {
+                    logger.info("<  {}: {}", header.getName(), header.getValue());
+                }
+                logger.info("");
+            
+                org.apache.http.HttpEntity entity = ((CloseableHttpResponse) response).getEntity();
+                String body = EntityUtils.toString(entity).trim();
+                logger.info("<<<< RESPONSE CONTENT <<<<");
+                logger.info("<  {}", body);
+                logger.info("");
+
+                org.apache.http.HttpEntity newEntity = new StringEntity(body,ContentType.get(entity));
+                response.setEntity(newEntity);
+                        
+
+                
+            }
+        };
+    }
+
+    
     /**
      * Perform the actual send of the message, according to the HttpConfiguration, and get the response. 
      * This will also check if only HTTPS is allowed, based on the {@link HttpConfiguration}, and will 
@@ -84,19 +154,15 @@ public class HttpUtils {
         HttpResponse httpResponse = null;
 
         try {
-            logger.info("Setting entity in POST message: {}", gson.toJson(request.getBody()));
             httpPost.setEntity(new StringEntity(gson.toJson(request.getBody())));
 
-            logger.info("Executing HTTP Post message to: " + httpPost.getURI());
             httpResponse = httpClient.execute(httpPost);
             
             String jsonResponse = null;
             if (httpResponse.getEntity() != null) {
                 jsonResponse = EntityUtils.toString(httpResponse.getEntity());
-                logger.info("Converting HTTP entity (the json response) back into a string: {}", jsonResponse);
             }
             
-            logger.info("Checking the HTTP response status code.");
             int statusCode = (httpResponse.getStatusLine().getStatusCode());
             if (statusCode != HttpStatus.SC_OK && statusCode != HttpStatus.SC_ACCEPTED && statusCode != HttpStatus.SC_CREATED) {
                 throw new FireException("Unexpected http status code [" + statusCode + "]");
@@ -147,19 +213,15 @@ public class HttpUtils {
         HttpResponse httpResponse = null;
 
         try {
-            logger.info("Setting entity in POST message: {}", gson.toJson(request.getBody()));
             httpPut.setEntity(new StringEntity(gson.toJson(request.getBody())));
 
-            logger.info("Executing HTTP Post message to: " + httpPut.getURI());
             httpResponse = httpClient.execute(httpPut);
             
             String jsonResponse = null;
             if (httpResponse.getEntity() != null) {
                 jsonResponse = EntityUtils.toString(httpResponse.getEntity());
-                logger.info("Converting HTTP entity (the json response) back into a string: {}", jsonResponse);
             }
             
-            logger.info("Checking the HTTP response status code.");
             int statusCode = (httpResponse.getStatusLine().getStatusCode());
             if (statusCode != HttpStatus.SC_OK && statusCode != HttpStatus.SC_ACCEPTED && statusCode != HttpStatus.SC_NO_CONTENT && statusCode != HttpStatus.SC_CREATED) {
                 throw new FireException("Unexpected http status code [" + statusCode + "]");
@@ -199,17 +261,14 @@ public class HttpUtils {
 
         try {
            
-            logger.debug("Executing HTTP Post message to: " + httpGet.getURI());
             httpResponse = httpClient.execute(httpGet);
 
-            logger.debug("Checking the HTTP response status code.");
             int statusCode = (httpResponse.getStatusLine().getStatusCode());
             if (statusCode != HttpStatus.SC_OK && statusCode != HttpStatus.SC_ACCEPTED && statusCode != HttpStatus.SC_CREATED) {
                 throw new FireException("Unexpected http status code [" + statusCode + "]");
             }
 
             String jsonResponse = EntityUtils.toString(httpResponse.getEntity());
-            logger.info("Converting HTTP entity (the json response) back into a string: {}", jsonResponse);
             
             EntityUtils.consume(httpResponse.getEntity());
             return (U) gson.fromJson(jsonResponse, request.getResponseClass());

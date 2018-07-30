@@ -1,6 +1,20 @@
 package com.fire.sdk;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+
+import org.apache.http.Header;
+import org.apache.http.HttpEntityEnclosingRequest;
+import org.apache.http.HttpException;
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpRequestInterceptor;
+import org.apache.http.HttpResponseInterceptor;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.protocol.HttpContext;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +27,7 @@ import com.fire.sdk.model.request.AccessTokenRequest;
 import com.fire.sdk.model.response.AccessTokenResponse;
 
 public class FireBusinessAPI {
+    private static final Logger logger = LoggerFactory.getLogger(FireBusinessAPI.class);
     private String mAccessToken;
     private Credentials mCredentials;
 
@@ -101,9 +116,7 @@ public class FireBusinessAPI {
 	 */
 	public <T, U extends Response<U>> U send(Request<T, U> request) {
 	    U response = null;
-	    
-		LOGGER.info("Sending JSON request to Fire.");
-		//send request to Fire.
+
 		
 		if (request.getMethod() == HttpUtils.HttpMethod.POST) {
 		    response = HttpUtils.sendPostMessage(request, this.mAccessToken, httpClient, httpConfiguration);
@@ -115,5 +128,6 @@ public class FireBusinessAPI {
 		
 		return response;
 	}
+	
 
 }
