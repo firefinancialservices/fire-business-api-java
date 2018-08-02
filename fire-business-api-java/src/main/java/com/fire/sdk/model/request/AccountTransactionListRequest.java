@@ -19,7 +19,10 @@ public class AccountTransactionListRequest implements Request<AccountTransaction
     private int offset;
     private Date dateRangeFrom;
     private Date dateRangeTo;
+    private String searchKeyword;
+    private String[] transactionTypes;
     
+
     public String getEndpoint() {
         ArrayList<String> queryStrings = new ArrayList<String>();
         String queryString = "";
@@ -42,6 +45,16 @@ public class AccountTransactionListRequest implements Request<AccountTransaction
         
         if (getOffset() != 0) {
             queryStrings.add("offset=" + getOffset());
+        }
+        
+        if (getSearchKeyword() != null) {
+            queryStrings.add("searchKeyword=" + getSearchKeyword());
+        }
+        
+        if (getTransactionTypes() != null) {
+            for (String tt : getTransactionTypes()) {
+                queryStrings.add("transactionTypes=" + tt);
+            }
         }
         
         if (queryStrings.size() > 0) {
@@ -114,6 +127,25 @@ public class AccountTransactionListRequest implements Request<AccountTransaction
         this.dateRangeTo = dateRangeTo;
         return this;
     }
+    
+    public String getSearchKeyword() {
+        return searchKeyword;
+    }
+
+    public AccountTransactionListRequest setSearchKeyword(String searchKeyword) {
+        this.searchKeyword = searchKeyword;
+        return this;
+    }
+
+    public String[] getTransactionTypes() {
+        return transactionTypes;
+    }
+
+    public AccountTransactionListRequest setTransactionTypes(String[] transactionTypes) {
+        this.transactionTypes = transactionTypes;
+        return this;
+    }
+
 
     @Override
     public Object getBody() {
