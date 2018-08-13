@@ -115,7 +115,7 @@ public class HttpUtils {
                 logger.info("");
             
                 org.apache.http.HttpEntity entity = ((CloseableHttpResponse) response).getEntity();
-                String body = EntityUtils.toString(entity).trim();
+                String body = (entity != null ? EntityUtils.toString(entity).trim() : "");
                 logger.info("<<<< RESPONSE CONTENT <<<<");
                 logger.info("<  {}", body);
                 logger.info("");
