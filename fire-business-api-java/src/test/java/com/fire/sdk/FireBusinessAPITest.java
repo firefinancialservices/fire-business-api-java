@@ -7,13 +7,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fire.sdk.http.HttpConfiguration;
+import com.fire.sdk.model.BankTransfer;
+import com.fire.sdk.model.BankTransfer.PayeeType;
+import com.fire.sdk.model.Batch;
 import com.fire.sdk.model.Credentials;
-import com.fire.sdk.model.request.DirectDebitListRequest;
-import com.fire.sdk.model.request.MandateListRequest;
-import com.fire.sdk.model.request.MandateRequest;
-import com.fire.sdk.model.response.DirectDebitListResponse;
-import com.fire.sdk.model.response.MandateListResponse;
-import com.fire.sdk.model.response.MandateResponse;
+import com.fire.sdk.model.request.BatchAddItemRequest;
+import com.fire.sdk.model.request.BatchListRequest;
+import com.fire.sdk.model.request.BatchNewRequest;
+import com.fire.sdk.model.request.BatchSubmitRequest;
+import com.fire.sdk.model.response.BatchAddItemResponse;
+import com.fire.sdk.model.response.BatchListResponse;
+import com.fire.sdk.model.response.BatchNewResponse;
 
 public class FireBusinessAPITest {
 
@@ -58,54 +62,55 @@ public class FireBusinessAPITest {
         
 		
 		
-//		BatchListResponse batches = api.send(new BatchListRequest());
-//		//logger.info("Batch 0 = {}", batches.getBatches().get(0).getBatchName());
-//		
+		BatchListResponse batches = api.send(new BatchListRequest());
+		logger.info("Batch 0 = {}", batches.getBatches().get(0).getBatchName());
+		
+
+		BatchNewRequest newBatchRequest = new BatchNewRequest();
+		newBatchRequest.setBatch(new Batch()
+		    .setType(Batch.BatchType.BANK_TRANSFER)
+		    .setCurrency("EUR")
+		    .setBatchName("Java SDK test")
+		    .setJobNumber("2019-01-09")
+//		    .setCallbackUrl("https://requestbin.foursevensix.com/1fqnqjm1")
+		);
+		
+		BatchNewResponse newBatch = api.send(newBatchRequest);
+		logger.info("New batch ID = {}", newBatch.getBatchUuid());
 //
-//		BatchNewRequest newBatchRequest = new BatchNewRequest();
-//		newBatchRequest.setBatch(new Batch()
-//		    .setType(Batch.BatchType.INTERNAL_TRANSFER)
-//		    .setCurrency("EUR")
-//		    .setBatchName("Java SDK test")
-//		    .setJobNumber("5")
-//		    .setCallbackUrl("https://requestbin.foursevensix.com/1fqnqjm1"));
-//		
-//		BatchNewResponse newBatch = api.send(newBatchRequest);
-//		logger.info("New batch ID = {}", newBatch.getBatchUuid());
-//
-//		String batchUuid = newBatch.getBatchUuid();
-//		
-//		BankTransfer bankTransfer = new BankTransfer();
-//		bankTransfer.setAmount(1000L);
-//		bankTransfer.setPayeeType(PayeeType.ACCOUNT_DETAILS);
-//		bankTransfer.setDestAccountHolderName("Owen O Byrne");
-//		bankTransfer.setDestIban("IE41AIBK93338461237358");
-//		bankTransfer.setIcanFrom(1472L);
-//		bankTransfer.setMyRef("testing API");
-//		bankTransfer.setYourRef("From API");
+		String batchUuid = newBatch.getBatchUuid();
+		
+		BankTransfer bankTransfer = new BankTransfer();
+		bankTransfer.setAmount(1000L);
+		bankTransfer.setPayeeType(PayeeType.ACCOUNT_DETAILS);
+		bankTransfer.setDestAccountHolderName("Owen O Byrne");
+		bankTransfer.setDestIban("IE41AIBK93338461237358");
+		bankTransfer.setIcanFrom(2150L);
+		bankTransfer.setMyRef("testing API");
+		bankTransfer.setYourRef("From API");
 //				                
 //		InternalTransfer internalTransfer = new InternalTransfer();
 //		internalTransfer.setAmount(500L);
-//		internalTransfer.setIcanFrom(2033L);
-//		internalTransfer.setIcanTo(2035L);
+//		internalTransfer.setIcanFrom(5532L);
+//		internalTransfer.setIcanTo(2150L);
 //		internalTransfer.setRef("Testing Java SDK");
 //		
-//		BatchAddItemResponse newItem = api.send(new BatchAddItemRequest().setBatchUuid(batchUuid).setBatchItem(bankTransfer));
+		BatchAddItemResponse newItem = api.send(new BatchAddItemRequest().setBatchUuid(batchUuid).setBatchItem(bankTransfer));
 //		BatchAddItemResponse newItem = api.send(new BatchAddItemRequest().setBatchUuid(batchUuid).setBatchItem(internalTransfer));
 //		logger.info("New batch item ID = {}", newItem.getBatchItemUuid());
 //	
 //		BatchListItemsResponse items = api.send(new BatchListItemsRequest().setBatchUuid(batchUuid).setBatchType(Batch.BatchType.INTERNAL_TRANSFER));
 //		BatchListItemsResponse items = api.send(new BatchListItemsRequest().setBatchUuid(batchUuid).setBatchType(Batch.BatchType.BANK_TRANSFER));
 //        
-//		api.send(new BatchSubmitRequest().setBatchUuid(batchUuid));
+		api.send(new BatchSubmitRequest().setBatchUuid(batchUuid));
 		
     
-		MandateListResponse mandateList = api.send(new MandateListRequest());
-		String mandateUuid = mandateList.getMandates().get(0).getMandateUuid();
-		MandateResponse mandate = api.send(new MandateRequest().setMandateUuid(mandateUuid));
-		DirectDebitListResponse directdebits = api.send(new DirectDebitListRequest().setMandateUuid(mandateUuid));
-		
-	
+//		MandateListResponse mandateList = api.send(new MandateListRequest());
+//		String mandateUuid = mandateList.getMandates().get(0).getMandateUuid();
+//		MandateResponse mandate = api.send(new MandateRequest().setMandateUuid(mandateUuid));
+//		DirectDebitListResponse directdebits = api.send(new DirectDebitListRequest().setMandateUuid(mandateUuid));
+//		
+//	
 		
 //		ActivitiesListResponse activitiesList = api.send(new ActivitiesListRequest());
 //		logger.info("Activity 0 = {}", activitiesList.getActivities().get(0).getDescription());
