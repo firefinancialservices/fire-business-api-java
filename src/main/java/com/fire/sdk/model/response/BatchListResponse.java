@@ -13,8 +13,9 @@ public class BatchListResponse implements Response<BatchListResponse> {
         return batchRequests;
     }
 
-    public void setBatches(ArrayList<Batch> batches) {
+    public BatchListResponse setBatches(ArrayList<Batch> batches) {
         this.batchRequests = batches;
+        return this;
     }
 	
 	

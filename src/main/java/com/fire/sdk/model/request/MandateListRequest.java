@@ -15,7 +15,8 @@ public class MandateListRequest implements Request<MandateListRequest, MandateLi
     private int limit;
     private int offset;
     private String[] mandateStatuses;
-    
+
+    @Override
 	public String getEndpoint() {
 	    ArrayList<String> queryStrings = new ArrayList<String>();
         String queryString = "";
@@ -49,11 +50,13 @@ public class MandateListRequest implements Request<MandateListRequest, MandateLi
         return "mandates" + queryString;
 
 	}
-	
+
+    @Override
     public HttpUtils.HttpMethod getMethod() {
         return HttpUtils.HttpMethod.GET;
     }
-	   
+
+    @Override 
 	public Class<MandateListResponse> getResponseClass() {
 		return MandateListResponse.class;
 	}

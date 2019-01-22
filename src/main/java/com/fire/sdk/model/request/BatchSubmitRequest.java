@@ -21,14 +21,17 @@ public class BatchSubmitRequest implements Request<BatchSubmitRequest, BatchSubm
         return this;
     }
 
+    @Override
     public String getEndpoint() {
 		return "batches/" + this.batchUuid;
 	}
-	
+
+    @Override
     public HttpUtils.HttpMethod getMethod() {
         return HttpUtils.HttpMethod.PUT;
     }
-	   
+
+    @Override
 	public Class<BatchSubmitResponse> getResponseClass() {
 		return BatchSubmitResponse.class;
 	}

@@ -32,6 +32,7 @@ public class BatchListItemsRequest implements Request<BatchListItemsRequest, Bat
         return this;
     }
 
+    @Override
     public String getEndpoint() {
 		String endpoint = "batches/" + this.batchUuid + "/";
 		
@@ -52,11 +53,13 @@ public class BatchListItemsRequest implements Request<BatchListItemsRequest, Bat
 		
 		return endpoint;
 	}
-	
+
+    @Override
     public HttpUtils.HttpMethod getMethod() {
         return HttpUtils.HttpMethod.GET;
     }
-	   
+
+    @Override
 	public Class<BatchListItemsResponse> getResponseClass() {
 		return BatchListItemsResponse.class;
 	}

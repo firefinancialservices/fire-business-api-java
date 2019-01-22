@@ -6,14 +6,16 @@ public class TransactionType {
     public String getType() {
         return type;
     }
-    public void setType(String type) {
+    public TransactionType setType(String type) {
         this.type = type;
+        return this;
     }
     public String getDescription() {
         return description;
     }
-    public void setDescription(String description) {
+    public TransactionType setDescription(String description) {
         this.description = description;
+        return this;
     }
     
     

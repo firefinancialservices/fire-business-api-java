@@ -31,6 +31,7 @@ public class BatchAddItemRequest implements Request<BatchAddItemRequest, BatchAd
         return this;
     }
 
+    @Override
     public String getEndpoint() {
 		String endpoint = "batches/" + this.batchUuid + "/";
 		if (batchItem instanceof BankTransfer) {
@@ -40,11 +41,13 @@ public class BatchAddItemRequest implements Request<BatchAddItemRequest, BatchAd
 		}
 		return endpoint;
 	}
-	
+
+    @Override
     public HttpUtils.HttpMethod getMethod() {
         return HttpUtils.HttpMethod.POST;
     }
-	   
+
+    @Override 
 	public Class<BatchAddItemResponse> getResponseClass() {
 		return BatchAddItemResponse.class;
 	}

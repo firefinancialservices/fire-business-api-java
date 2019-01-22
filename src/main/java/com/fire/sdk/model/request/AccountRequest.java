@@ -13,18 +13,21 @@ public class AccountRequest implements Request<AccountRequest, AccountResponse> 
 
 	public Long accountId;
 	
-	
+
+    @Override
 	public String getEndpoint() {
 	    if (getAccountId() == null) {
 	        throw new FireException("You must setAccountId() first!");
 	    }
 		return "accounts/" + getAccountId();
 	}
-	
+
+    @Override
     public HttpUtils.HttpMethod getMethod() {
         return HttpUtils.HttpMethod.GET;
     }
-	   
+
+    @Override
 	public Class<AccountResponse> getResponseClass() {
 		return AccountResponse.class;
 	}

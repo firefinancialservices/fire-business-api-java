@@ -20,80 +20,90 @@ public class BankTransfer extends BatchItem {
         return icanFrom;
     }
 
-    public void setIcanFrom(Long icanFrom) {
+    public BankTransfer setIcanFrom(Long icanFrom) {
         this.icanFrom = icanFrom;
+        return this;
     }
 
     public PayeeType getPayeeType() {
         return payeeType;
     }
 
-    public void setPayeeType(PayeeType payeeType) {
+    public BankTransfer setPayeeType(PayeeType payeeType) {
         this.payeeType = payeeType;
+        return this;
     }
 
     public String getDestNsc() {
         return destNsc;
     }
 
-    public void setDestNsc(String destNsc) {
+    public BankTransfer setDestNsc(String destNsc) {
         this.destNsc = destNsc;
+        return this;
     }
 
     public String getDestAccountNumber() {
         return destAccountNumber;
     }
 
-    public void setDestAccountNumber(String destAccountNumber) {
+    public BankTransfer setDestAccountNumber(String destAccountNumber) {
         this.destAccountNumber = destAccountNumber;
+        return this;
     }
 
     public String getDestIban() {
         return destIban;
     }
 
-    public void setDestIban(String destIban) {
+    public BankTransfer setDestIban(String destIban) {
         this.destIban = destIban;
+        return this;
     }
 
     public String getDestAccountHolderName() {
         return destAccountHolderName;
     }
 
-    public void setDestAccountHolderName(String destAccountHolderName) {
+    public BankTransfer setDestAccountHolderName(String destAccountHolderName) {
         this.destAccountHolderName = destAccountHolderName;
+        return this;
     }
 
     public Long getPayeeId() {
         return payeeId;
     }
 
-    public void setPayeeId(Long payeeId) {
+    public BankTransfer setPayeeId(Long payeeId) {
         this.payeeId = payeeId;
+        return this;
     }
 
     public Long getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public BankTransfer setAmount(Long amount) {
         this.amount = amount;
+        return this;
     }
 
     public String getMyRef() {
         return myRef;
     }
 
-    public void setMyRef(String myRef) {
+    public BankTransfer setMyRef(String myRef) {
         this.myRef = myRef;
+        return this;
     }
 
     public String getYourRef() {
         return yourRef;
     }
 
-    public void setYourRef(String yourRef) {
+    public BankTransfer setYourRef(String yourRef) {
         this.yourRef = yourRef;
+        return this;
     }
     
     

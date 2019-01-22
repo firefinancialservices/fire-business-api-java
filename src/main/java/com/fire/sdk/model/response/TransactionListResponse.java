@@ -13,20 +13,23 @@ public class TransactionListResponse implements Response<TransactionListResponse
     public long getTotal() {
         return total;
     }
-    public void setTotal(long total) {
+    public TransactionListResponse setTotal(long total) {
         this.total = total;
+        return this;
     }
     public long getDateRangeTo() {
         return dateRangeTo;
     }
-    public void setDateRangeTo(long dateRangeTo) {
+    public TransactionListResponse setDateRangeTo(long dateRangeTo) {
         this.dateRangeTo = dateRangeTo;
+        return this;
     }
     public ArrayList<Transaction> getTransactions() {
         return transactions;
     }
-    public void setTransactions(ArrayList<Transaction> transactions) {
+    public TransactionListResponse setTransactions(ArrayList<Transaction> transactions) {
         this.transactions = transactions;
+        return this;
     }
 
     

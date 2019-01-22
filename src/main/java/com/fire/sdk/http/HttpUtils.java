@@ -52,8 +52,8 @@ public class HttpUtils {
      * pooling and does not reuse connections. Timeouts for connection and socket are taken from the 
      * {@link HttpConfiguration} object.
      * 
-     * @param httpConfiguration
-     * @return CloseableHttpClient
+     * @param httpConfiguration An HttpConfiguration for this API client
+     * @return a configured HttpClient
      */
     public static CloseableHttpClient getDefaultClient(HttpConfiguration httpConfiguration) {
 
@@ -73,7 +73,7 @@ public class HttpUtils {
         return httpClient;
     }
 
-    
+
     private static HttpRequestInterceptor createHttpRequestInterceptor() {
         return new HttpRequestInterceptor() {
             
@@ -131,16 +131,20 @@ public class HttpUtils {
 
     
     /**
-     * Perform the actual send of the message, according to the HttpConfiguration, and get the response. 
+     * Internal Use. Perform the actual send of the message.
+     *  
      * This will also check if only HTTPS is allowed, based on the {@link HttpConfiguration}, and will 
      * throw a {@link FireException} if HTTP is used when only HTTPS is allowed. A {@link FireException} 
      * is also thrown if the response from Fire is not success (ie. if it's not 200 status code). 
      * 
      * 
-     * @param xml
-     * @param httpClient
-     * @param httpConfiguration
-     * @return the xml response
+     * @param request a prepared request to send
+     * @param <T> the class of the request object
+     * @param <U> the class of the response object
+     * @param accessToken the accessToken to use. 
+     * @param httpClient the HttpClient to use.
+     * @param httpConfiguration the HttpConfiguration to use. 
+     * @return the response to the call. 
      */
     public static <T, U extends Response<U>> U sendPostMessage(Request<T, U> request, String accessToken, HttpClient httpClient, HttpConfiguration httpConfiguration) {
         Gson gson = new Gson();
@@ -190,16 +194,20 @@ public class HttpUtils {
     }
     
     /**
-     * Perform the actual send of the message, according to the HttpConfiguration, and get the response. 
+     * Internal Use. Perform the actual send of the message.
+     *  
      * This will also check if only HTTPS is allowed, based on the {@link HttpConfiguration}, and will 
      * throw a {@link FireException} if HTTP is used when only HTTPS is allowed. A {@link FireException} 
      * is also thrown if the response from Fire is not success (ie. if it's not 200 status code). 
      * 
      * 
-     * @param xml
-     * @param httpClient
-     * @param httpConfiguration
-     * @return the xml response
+     * @param request a prepared request to send
+     * @param <T> the class of the request object
+     * @param <U> the class of the response object
+     * @param accessToken the accessToken to use. 
+     * @param httpClient the HttpClient to use.
+     * @param httpConfiguration the HttpConfiguration to use. 
+     * @return the response to the call. 
      */
     public static <T, U extends Response<U>> U sendPutMessage(Request<T, U> request, String accessToken, HttpClient httpClient, HttpConfiguration httpConfiguration) {
         Gson gson = new Gson();
@@ -248,6 +256,22 @@ public class HttpUtils {
         }
     }
     
+    /**
+     * Internal Use. Perform the actual send of the message.
+     *  
+     * This will also check if only HTTPS is allowed, based on the {@link HttpConfiguration}, and will 
+     * throw a {@link FireException} if HTTP is used when only HTTPS is allowed. A {@link FireException} 
+     * is also thrown if the response from Fire is not success (ie. if it's not 200 status code). 
+     * 
+     * 
+     * @param request a prepared request to send
+     * @param <T> the class of the request object
+     * @param <U> the class of the response object
+     * @param accessToken the accessToken to use. 
+     * @param httpClient the HttpClient to use.
+     * @param httpConfiguration the HttpConfiguration to use. 
+     * @return the response to the call. 
+     */
     public static <T, U extends Response<U>> U sendGetMessage(Request<T, U> request, String accessToken, HttpClient httpClient, HttpConfiguration httpConfiguration) {
         Gson gson = new Gson();
         HttpGet httpGet = new HttpGet(httpConfiguration.getEndpoint() + "/" + request.getEndpoint());

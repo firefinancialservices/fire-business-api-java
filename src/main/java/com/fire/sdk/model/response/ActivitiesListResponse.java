@@ -12,8 +12,9 @@ public class ActivitiesListResponse implements Response<ActivitiesListResponse> 
 		return activities;
 	}
 
-	public void setActivities(ArrayList<Activity> activities) {
+	public ActivitiesListResponse setActivities(ArrayList<Activity> activities) {
 		this.activities = activities;
+		return this;
 	}
 
 }

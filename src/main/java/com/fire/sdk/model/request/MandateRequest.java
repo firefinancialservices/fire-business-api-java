@@ -13,18 +13,21 @@ public class MandateRequest implements Request<MandateRequest, MandateResponse> 
 
 	public String mandateUuid;
 	
-	
+
+    @Override
 	public String getEndpoint() {
 	    if (getMandateUuid() == null) {
 	        throw new FireException("You must setMandateUuid() first!");
 	    }
 		return "mandates/" + getMandateUuid();
 	}
-	
+
+    @Override
     public HttpUtils.HttpMethod getMethod() {
         return HttpUtils.HttpMethod.GET;
     }
-	   
+
+    @Override
 	public Class<MandateResponse> getResponseClass() {
 		return MandateResponse.class;
 	}

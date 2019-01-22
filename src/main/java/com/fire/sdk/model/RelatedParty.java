@@ -9,24 +9,27 @@ public class RelatedParty {
         return type;
     }
 
-    public void setType(RelatedParty.Type type) {
+    public RelatedParty setType(RelatedParty.Type type) {
         this.type = type;
+        return this;
     }
     
     public RelatedParty.Account getAccount() {
 		return account;
 	}
 
-	public void setAccount(RelatedParty.Account account) {
+	public RelatedParty setAccount(RelatedParty.Account account) {
 		this.account = account;
+        return this;
 	}
 	
 	public RelatedParty.User getUser() {
 		return user;
 	}
 
-	public void setUser(RelatedParty.User user) {
+	public RelatedParty setUser(RelatedParty.User user) {
 		this.user = user;
+        return this;
 	}
 	
 
@@ -45,20 +48,23 @@ public class RelatedParty {
 		public String getAlias() {
 			return alias;
 		}
-		public void setAlias(String alias) {
+		public User setAlias(String alias) {
 			this.alias = alias;
+	        return this;
 		}
 		public String getMobilePhoneNumber() {
 			return mobilePhoneNumber;
 		}
-		public void setMobilePhoneNumber(String mobilePhoneNumber) {
+		public User setMobilePhoneNumber(String mobilePhoneNumber) {
 			this.mobilePhoneNumber = mobilePhoneNumber;
+	        return this;
 		}
 		public String getImageUrl() {
 			return imageUrl;
 		}
-		public void setImageUrl(String imageUrl) {
+		public User setImageUrl(String imageUrl) {
 			this.imageUrl = imageUrl;
+	        return this;
 		}
 		
 		
@@ -75,38 +81,44 @@ public class RelatedParty {
 		public Long getId() {
 			return id;
 		}
-		public void setId(Long id) {
+		public Account setId(Long id) {
 			this.id = id;
+	        return this;
 		}
 		public String getAlias() {
 			return alias;
 		}
-		public void setAlias(String alias) {
+		public Account setAlias(String alias) {
 			this.alias = alias;
+	        return this;
 		}
 		public String getIban() {
 			return iban;
 		}
-		public void setIban(String iban) {
+		public Account setIban(String iban) {
 			this.iban = iban;
+	        return this;
 		}
 		public String getBic() {
 			return bic;
 		}
-		public void setBic(String bic) {
+		public Account setBic(String bic) {
 			this.bic = bic;
+	        return this;
 		}
 		public String getNsc() {
 			return nsc;
 		}
-		public void setNsc(String nsc) {
+		public Account setNsc(String nsc) {
 			this.nsc = nsc;
+	        return this;
 		}
 		public String getAccountNumber() {
 			return accountNumber;
 		}
-		public void setAccountNumber(String accountNumber) {
+		public Account setAccountNumber(String accountNumber) {
 			this.accountNumber = accountNumber;
+	        return this;
 		}
     	
     	

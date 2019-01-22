@@ -7,17 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fire.sdk.http.HttpConfiguration;
-import com.fire.sdk.model.BankTransfer;
-import com.fire.sdk.model.BankTransfer.PayeeType;
-import com.fire.sdk.model.Batch;
+import com.fire.sdk.model.Batch.BatchStatus;
 import com.fire.sdk.model.Credentials;
-import com.fire.sdk.model.request.BatchAddItemRequest;
 import com.fire.sdk.model.request.BatchListRequest;
-import com.fire.sdk.model.request.BatchNewRequest;
-import com.fire.sdk.model.request.BatchSubmitRequest;
-import com.fire.sdk.model.response.BatchAddItemResponse;
 import com.fire.sdk.model.response.BatchListResponse;
-import com.fire.sdk.model.response.BatchNewResponse;
 
 public class FireBusinessAPITest {
 
@@ -62,47 +55,48 @@ public class FireBusinessAPITest {
         
 		
 		
-		BatchListResponse batches = api.send(new BatchListRequest());
+		BatchListResponse batches = api.send(new BatchListRequest().setBatchStatuses(new BatchStatus[] { BatchStatus.PENDING_APPROVAL, BatchStatus.PENDING_PARENT_BATCH_APPROVAL }));
 		logger.info("Batch 0 = {}", batches.getBatches().get(0).getBatchName());
 		
 
-		BatchNewRequest newBatchRequest = new BatchNewRequest();
-		newBatchRequest.setBatch(new Batch()
-		    .setType(Batch.BatchType.BANK_TRANSFER)
-		    .setCurrency("EUR")
-		    .setBatchName("Java SDK test")
-		    .setJobNumber("2019-01-09")
+//		BatchNewRequest newBatchRequest = new BatchNewRequest();
+//		newBatchRequest.setBatch(new Batch()
+//		    .setType(Batch.BatchType.BANK_TRANSFER)
+//		    .setCurrency("EUR")
+//		    .setBatchName("Java SDK test")
+//		    .setJobNumber("2019-01-09")
 //		    .setCallbackUrl("https://requestbin.foursevensix.com/1fqnqjm1")
-		);
-		
-		BatchNewResponse newBatch = api.send(newBatchRequest);
-		logger.info("New batch ID = {}", newBatch.getBatchUuid());
-//
-		String batchUuid = newBatch.getBatchUuid();
-		
-		BankTransfer bankTransfer = new BankTransfer();
-		bankTransfer.setAmount(1000L);
-		bankTransfer.setPayeeType(PayeeType.ACCOUNT_DETAILS);
-		bankTransfer.setDestAccountHolderName("Owen O Byrne");
-		bankTransfer.setDestIban("IE41AIBK93338461237358");
-		bankTransfer.setIcanFrom(2150L);
-		bankTransfer.setMyRef("testing API");
-		bankTransfer.setYourRef("From API");
-//				                
-//		InternalTransfer internalTransfer = new InternalTransfer();
-//		internalTransfer.setAmount(500L);
-//		internalTransfer.setIcanFrom(5532L);
-//		internalTransfer.setIcanTo(2150L);
-//		internalTransfer.setRef("Testing Java SDK");
+//		);
 //		
-		BatchAddItemResponse newItem = api.send(new BatchAddItemRequest().setBatchUuid(batchUuid).setBatchItem(bankTransfer));
+//		BatchNewResponse newBatch = api.send(newBatchRequest);
+//		logger.info("New batch ID = {}", newBatch.getBatchUuid());
+//
+//		String batchUuid = newBatch.getBatchUuid();
+//		
+//		BankTransfer bankTransfer = new BankTransfer()
+//        	.setAmount(1000L)
+//        	.setPayeeType(PayeeType.ACCOUNT_DETAILS)
+//        	.setDestAccountHolderName("Owen O Byrne")
+//        	.setDestIban("IE41AIBK93338461237358")
+//        	.setIcanFrom(2150L)
+//        	.setMyRef("testing API")
+//        	.setYourRef("From API");
+//
+//				                
+//		InternalTransfer internalTransfer = new InternalTransfer()
+//    		.setAmount(500L)
+//    		.setIcanFrom(5532L)
+//    		.setIcanTo(2150L)
+//    		.setRef("Testing Java SDK");
+//		
+//		BatchAddItemResponse newItem = api.send(new BatchAddItemRequest().setBatchUuid(batchUuid).setBatchItem(bankTransfer));
 //		BatchAddItemResponse newItem = api.send(new BatchAddItemRequest().setBatchUuid(batchUuid).setBatchItem(internalTransfer));
 //		logger.info("New batch item ID = {}", newItem.getBatchItemUuid());
 //	
 //		BatchListItemsResponse items = api.send(new BatchListItemsRequest().setBatchUuid(batchUuid).setBatchType(Batch.BatchType.INTERNAL_TRANSFER));
 //		BatchListItemsResponse items = api.send(new BatchListItemsRequest().setBatchUuid(batchUuid).setBatchType(Batch.BatchType.BANK_TRANSFER));
 //        
-		api.send(new BatchSubmitRequest().setBatchUuid(batchUuid));
+//		api.send(new BatchSubmitRequest().setBatchUuid(batchUuid));
 		
     
 //		MandateListResponse mandateList = api.send(new MandateListRequest());
@@ -134,9 +128,9 @@ public class FireBusinessAPITest {
 //			e.printStackTrace();
 //		}
 //        logger.info("Transaction 0 details: {}", transactions.getTransactions().get(0).getType());
-        
+//        
 //        TransactionResponse transaction = api.send(new TransactionRequest().setTransactionId(203162l));
-        
+//        
 
 	}
 }

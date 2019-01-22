@@ -13,18 +13,21 @@ public class TransactionRequest implements Request<TransactionRequest, Transacti
 
 	private Long transactionId;
 	
-	
+
+    @Override
 	public String getEndpoint() {
 	    if (getTransactionId() == null) {
 	        throw new FireException("You must setTransactionId() first!");
 	    }
 		return "transactions/" + getTransactionId();
 	}
-	
+
+    @Override
     public HttpUtils.HttpMethod getMethod() {
         return HttpUtils.HttpMethod.GET;
     }
-	   
+
+    @Override
 	public Class<TransactionResponse> getResponseClass() {
 		return TransactionResponse.class;
 	}

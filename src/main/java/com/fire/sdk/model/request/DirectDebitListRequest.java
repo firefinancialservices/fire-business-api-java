@@ -25,6 +25,7 @@ public class DirectDebitListRequest implements Request<DirectDebitListRequest, D
         return this;
     }
 
+    @Override
     public String getEndpoint() {
 	    ArrayList<String> queryStrings = new ArrayList<String>();
         String queryString = "";
@@ -56,11 +57,13 @@ public class DirectDebitListRequest implements Request<DirectDebitListRequest, D
         return "directdebits" + queryString;
 
 	}
-	
+
+    @Override
     public HttpUtils.HttpMethod getMethod() {
         return HttpUtils.HttpMethod.GET;
     }
-	   
+
+    @Override
 	public Class<DirectDebitListResponse> getResponseClass() {
 		return DirectDebitListResponse.class;
 	}

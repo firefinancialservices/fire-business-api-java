@@ -12,14 +12,16 @@ public class DirectDebitListResponse implements Response<DirectDebitListResponse
     public long getTotal() {
         return total;
     }
-    public void setTotal(long total) {
+    public DirectDebitListResponse setTotal(long total) {
         this.total = total;
+        return this;
     }
     public ArrayList<DirectDebit> getDirectdebits() {
         return directdebits;
     }
-    public void setDirectdebits(ArrayList<DirectDebit> directdebits) {
+    public DirectDebitListResponse setDirectdebits(ArrayList<DirectDebit> directdebits) {
         this.directdebits = directdebits;
+        return this;
     }
 
 

@@ -9,15 +9,15 @@ public class FireException extends RuntimeException {
 
 
 	/**
-	 * 
+	 * version Id
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor for FireException.
 	 * 
-	 * @param message
-	 * @param throwable
+	 * @param message the message to display to the calling code
+	 * @param throwable an exception to return to the calling code. 
 	 */
 	public FireException(String message, Throwable throwable) {
 		super(message, throwable);
@@ -26,7 +26,7 @@ public class FireException extends RuntimeException {
 	/**
 	 * Constructor for FireException.
 	 * 
-	 * @param message
+	 * @param message the message to display to the calling code
 	 */
 	public FireException(String message) {
 		super(message);

@@ -7,14 +7,16 @@ public class Currency {
     public String getDescription() {
         return description;
     }
-    public void setDescription(String description) {
+    public Currency setDescription(String description) {
         this.description = description;
+        return this;
     }
     public String getCode() {
         return code;
     }
-    public void setCode(String code) {
+    public Currency setCode(String code) {
         this.code = code;
+        return this;
     }
     
     

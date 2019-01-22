@@ -9,8 +9,8 @@ import com.fire.sdk.http.HttpUtils;
  *
  */
 public interface Request<T, U extends Response<U>> {
-	public String getEndpoint();
-	public HttpUtils.HttpMethod getMethod();
-	public Class<U> getResponseClass();
-	public Object getBody();
+	String getEndpoint();
+	HttpUtils.HttpMethod getMethod();
+	Class<U> getResponseClass();
+	Object getBody();
 }

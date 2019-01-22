@@ -23,6 +23,7 @@ public class AccountTransactionListRequest implements Request<AccountTransaction
     private String[] transactionTypes;
     
 
+    @Override
     public String getEndpoint() {
         ArrayList<String> queryStrings = new ArrayList<String>();
         String queryString = "";
@@ -74,11 +75,13 @@ public class AccountTransactionListRequest implements Request<AccountTransaction
             return "accounts/" + getAccountId() + "/transactions" + queryString;
         }
     }
-    
+
+    @Override
     public HttpUtils.HttpMethod getMethod() {
         return HttpUtils.HttpMethod.GET;
     }
-	   
+
+    @Override
 	public Class<AccountTransactionListResponse> getResponseClass() {
 		return AccountTransactionListResponse.class;
 	}

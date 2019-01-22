@@ -26,96 +26,108 @@ public class Mandate {
         return alias;
     }
 
-    public void setAlias(String alias) {
+    public Mandate setAlias(String alias) {
         this.alias = alias;
+        return this;
     }
 
     public Currency getCurrency() {
         return currency;
     }
 
-    public void setCurrency(Currency currency) {
+    public Mandate setCurrency(Currency currency) {
         this.currency = currency;
+        return this;
     }
 
     public Date getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
+    public Mandate setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
+        return this;
     }
 
     public Date getLastUpdated() {
         return lastUpdated;
     }
 
-    public void setLastUpdated(Date lastUpdated) {
+    public Mandate setLastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
+        return this;
     }
 
     public String getMandateReference() {
         return mandateReference;
     }
 
-    public void setMandateReference(String mandateReference) {
+    public Mandate setMandateReference(String mandateReference) {
         this.mandateReference = mandateReference;
+        return this;
     }
 
     public String getMandateUuid() {
         return mandateUuid;
     }
 
-    public void setMandateUuid(String mandateUuid) {
+    public Mandate setMandateUuid(String mandateUuid) {
         this.mandateUuid = mandateUuid;
+        return this;
     }
 
     public Integer getNumberOfDirectDebitsCollected() {
         return numberOfDirectDebitsCollected;
     }
 
-    public void setNumberOfDirectDebitsCollected(Integer numberOfDirectDebitsCollected) {
+    public Mandate setNumberOfDirectDebitsCollected(Integer numberOfDirectDebitsCollected) {
         this.numberOfDirectDebitsCollected = numberOfDirectDebitsCollected;
+        return this;
     }
 
     public String getOriginatorName() {
         return originatorName;
     }
 
-    public void setOriginatorName(String originatorName) {
+    public Mandate setOriginatorName(String originatorName) {
         this.originatorName = originatorName;
+        return this;
     }
 
     public String getOriginatorReference() {
         return originatorReference;
     }
 
-    public void setOriginatorReference(String originatorReference) {
+    public Mandate setOriginatorReference(String originatorReference) {
         this.originatorReference = originatorReference;
+        return this;
     }
 
     public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public Mandate setStatus(Status status) {
         this.status = status;
+        return this;
     }
 
     public Long getTargetIcan() {
         return targetIcan;
     }
 
-    public void setTargetIcan(Long targetIcan) {
+    public Mandate setTargetIcan(Long targetIcan) {
         this.targetIcan = targetIcan;
+        return this;
     }
 
     public Long getValueOfDirectDebitsCollected() {
         return valueOfDirectDebitsCollected;
     }
 
-    public void setValueOfDirectDebitsCollected(Long valueOfDirectDebitsCollected) {
+    public Mandate setValueOfDirectDebitsCollected(Long valueOfDirectDebitsCollected) {
         this.valueOfDirectDebitsCollected = valueOfDirectDebitsCollected;
+        return this;
     }
     
     

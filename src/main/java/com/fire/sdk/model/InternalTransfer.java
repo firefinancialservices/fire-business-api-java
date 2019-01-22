@@ -9,26 +9,30 @@ public class InternalTransfer extends BatchItem {
     public Long getIcanFrom() {
         return icanFrom;
     }
-    public void setIcanFrom(Long icanFrom) {
+    public InternalTransfer setIcanFrom(Long icanFrom) {
         this.icanFrom = icanFrom;
+        return this;
     }
     public Long getIcanTo() {
         return icanTo;
     }
-    public void setIcanTo(Long icanTo) {
+    public InternalTransfer setIcanTo(Long icanTo) {
         this.icanTo = icanTo;
+        return this;
     }
     public Long getAmount() {
         return amount;
     }
-    public void setAmount(Long amount) {
+    public InternalTransfer setAmount(Long amount) {
         this.amount = amount;
+        return this;
     }
     public String getRef() {
         return ref;
     }
-    public void setRef(String ref) {
+    public InternalTransfer setRef(String ref) {
         this.ref = ref;
+        return this;
     }
     
     

@@ -12,8 +12,9 @@ public class AccountListResponse implements Response<AccountListResponse> {
         return accounts;
     }
 
-    public void setAccounts(ArrayList<Account> accounts) {
+    public AccountListResponse setAccounts(ArrayList<Account> accounts) {
         this.accounts = accounts;
+        return this;
     }
 	
 	

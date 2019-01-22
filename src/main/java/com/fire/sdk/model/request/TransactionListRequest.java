@@ -17,7 +17,8 @@ public class TransactionListRequest implements Request<TransactionListRequest, T
     private int offset;
     private Date dateRangeFrom;
     private Date dateRangeTo;
-    
+
+    @Override
     public String getEndpoint() {
         ArrayList<String> queryStrings = new ArrayList<String>();
         String queryString = "";
@@ -55,11 +56,13 @@ public class TransactionListRequest implements Request<TransactionListRequest, T
             return "transactions" + queryString;
         }
     }
-    
+
+    @Override
     public HttpUtils.HttpMethod getMethod() {
         return HttpUtils.HttpMethod.GET;
     }
-	   
+
+    @Override
 	public Class<TransactionListResponse> getResponseClass() {
 		return TransactionListResponse.class;
 	}

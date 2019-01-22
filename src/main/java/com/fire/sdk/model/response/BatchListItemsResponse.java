@@ -12,8 +12,9 @@ public class BatchListItemsResponse implements Response<BatchListItemsResponse> 
         return items;
     }
 
-    public void setItems(ArrayList<BatchItem> items) {
+    public BatchListItemsResponse setItems(ArrayList<BatchItem> items) {
         this.items = items;
+        return this;
     }
 	
 	

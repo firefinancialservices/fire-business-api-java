@@ -14,50 +14,58 @@ public class Card {
     public long getCardId() {
         return cardId;
     }
-    public void setCardId(long cardId) {
+    public Card setCardId(long cardId) {
         this.cardId = cardId;
+        return this;
     }
     public String getProvider() {
         return provider;
     }
-    public void setProvider(String provider) {
+    public Card setProvider(String provider) {
         this.provider = provider;
+        return this;
     }
     public String getAlias() {
         return alias;
     }
-    public void setAlias(String alias) {
+    public Card setAlias(String alias) {
         this.alias = alias;
+        return this;
     }
     public String getMaskedPan() {
         return maskedPan;
     }
-    public void setMaskedPan(String maskedPan) {
+    public Card setMaskedPan(String maskedPan) {
         this.maskedPan = maskedPan;
+        return this;
     }
     public String getFirstName() {
         return firstName;
     }
-    public void setFirstName(String firstName) {
+    public Card setFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
     }
     public String getLastName() {
         return lastName;
     }
-    public void setLastName(String lastName) {
+    public Card setLastName(String lastName) {
         this.lastName = lastName;
+        return this;
     }
     public String getBusinessName() {
         return businessName;
     }
-    public void setBusinessName(String businessName) {
+    public Card setBusinessName(String businessName) {
         this.businessName = businessName;
+        return this;
     }
     public Date getExpiryDate() {
         return expiryDate;
     }
-    public void setExpiryDate(Date expiryDate) {
+    public Card setExpiryDate(Date expiryDate) {
         this.expiryDate = expiryDate;
+        return this;
     }
     
     

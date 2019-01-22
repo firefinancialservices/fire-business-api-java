@@ -11,14 +11,17 @@ import com.fire.sdk.model.response.ActivitiesListResponse;
 public class ActivitiesListRequest implements Request<ActivitiesListRequest, ActivitiesListResponse> {
 	private static final Logger logger = LoggerFactory.getLogger(ActivitiesListRequest.class);
 
+    @Override
 	public String getEndpoint() {
 		return "activities";
 	}
-	
+
+    @Override
     public HttpUtils.HttpMethod getMethod() {
         return HttpUtils.HttpMethod.GET;
     }
-	   
+
+    @Override
 	public Class<ActivitiesListResponse> getResponseClass() {
 		return ActivitiesListResponse.class;
 	}

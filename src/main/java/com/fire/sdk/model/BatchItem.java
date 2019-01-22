@@ -14,8 +14,9 @@ public class BatchItem {
         return result;
     }
 
-    public void setResult(Result result) {
+    public BatchItem setResult(Result result) {
         this.result = result;
+        return this;
     }
 
     public static class Result {
@@ -24,14 +25,16 @@ public class BatchItem {
         public Long getCode() {
             return code;
         }
-        public void setCode(Long code) {
+        public Result setCode(Long code) {
             this.code = code;
+            return this;
         }
         public String getMessage() {
             return message;
         }
-        public void setMessage(String message) {
+        public Result setMessage(String message) {
             this.message = message;
+            return this;
         }
         
         
@@ -41,32 +44,36 @@ public class BatchItem {
         return batchItemUuid;
     }
 
-    public void setBatchItemUuid(String batchItemUuid) {
+    public BatchItem setBatchItemUuid(String batchItemUuid) {
         this.batchItemUuid = batchItemUuid;
+        return this;
     }
     
     public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public BatchItem setStatus(Status status) {
         this.status = status;
+        return this;
     }
 
     public Date getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
+    public BatchItem setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
+        return this;
     }
 
     public Date getLastUpdated() {
         return lastUpdated;
     }
 
-    public void setLastUpdated(Date lastUpdated) {
+    public BatchItem setLastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
+        return this;
     }
 
     public enum Status {

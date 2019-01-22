@@ -18,14 +18,17 @@ public class AccessTokenRequest implements Request<AccessTokenRequest, AccessTok
 	private String grantType;
 	private String clientSecret;
 
+    @Override
 	public String getEndpoint() {
 		return "apps/accesstokens";
 	}
-	
+
+    @Override
 	public HttpUtils.HttpMethod getMethod() {
 	    return HttpUtils.HttpMethod.POST;
 	}
-	
+
+    @Override
 	public Class<AccessTokenResponse> getResponseClass() {
 		return AccessTokenResponse.class;
 	}

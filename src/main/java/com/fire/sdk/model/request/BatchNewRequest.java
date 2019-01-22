@@ -21,14 +21,17 @@ public class BatchNewRequest implements Request<BatchNewRequest, BatchNewRespons
         this.batch = batch;
     }
 
+    @Override
     public String getEndpoint() {
 		return "batches";
 	}
-	
+
+    @Override
     public HttpUtils.HttpMethod getMethod() {
         return HttpUtils.HttpMethod.POST;
     }
-	   
+
+    @Override 
 	public Class<BatchNewResponse> getResponseClass() {
 		return BatchNewResponse.class;
 	}

@@ -10,14 +10,17 @@ import com.fire.sdk.model.response.AccountListResponse;
 public class AccountListRequest implements Request<AccountListRequest, AccountListResponse> {
 	private static final Logger logger = LoggerFactory.getLogger(AccountListRequest.class);
 
+    @Override
 	public String getEndpoint() {
 		return "accounts";
 	}
-	
+
+    @Override
     public HttpUtils.HttpMethod getMethod() {
         return HttpUtils.HttpMethod.GET;
     }
-	   
+
+    @Override
 	public Class<AccountListResponse> getResponseClass() {
 		return AccountListResponse.class;
 	}

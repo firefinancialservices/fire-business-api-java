@@ -6,7 +6,7 @@ public class Batch {
     
     private String batchUuid;
     private BatchType type;
-    private String status;
+    private BatchStatus status;
     private String sourceName;
     private String batchName;
     private String jobNumber;
@@ -25,6 +25,10 @@ public class Batch {
         INTERNAL_TRANSFER, BANK_TRANSFER, NEW_PAYEE
     }
     
+    public enum BatchStatus {
+        OPEN,PENDING_APPROVAL,PENDING_PARENT_BATCH_APPROVAL,COMPLETE,CANCELLED,REJECTED
+    }
+    
     public String getBatchUuid() {
         return batchUuid;
     }
@@ -40,10 +44,10 @@ public class Batch {
         this.type = type;
         return this;
     }
-    public String getStatus() {
+    public BatchStatus getStatus() {
         return status;
     }
-    public Batch setStatus(String status) {
+    public Batch setStatus(BatchStatus status) {
         this.status = status;
         return this;
     }

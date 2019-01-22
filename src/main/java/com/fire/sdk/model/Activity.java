@@ -14,32 +14,37 @@ public class Activity {
 	public Long getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public Activity setId(Long id) {
 		this.id = id;
+		return this;
 	}
 	public Long getUserId() {
 		return userId;
 	}
-	public void setUserId(Long userId) {
+	public Activity setUserId(Long userId) {
 		this.userId = userId;
+        return this;
 	}
 	public String getType() {
 		return type;
 	}
-	public void setType(String type) {
+	public Activity setType(String type) {
 		this.type = type;
+        return this;
 	}
 	public String getDescription() {
 		return description;
 	}
-	public void setDescription(String description) {
+	public Activity setDescription(String description) {
 		this.description = description;
+        return this;
 	}
 	public Date getDateCreated() {
 		return dateCreated;
 	}
-	public void setDateCreated(Date dateCreated) {
+	public Activity setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
+        return this;
 	}
     
     
