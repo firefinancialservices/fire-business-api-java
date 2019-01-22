@@ -3,6 +3,24 @@ A Java SDK for the Fire Business API
 
 ![Release Artifacts][Badge-Sonatype]
 
+## Include in your Project
+### Maven
+
+```
+<dependency>
+	<groupId>com.fire</groupId>
+	<artifactId>fire-business-api-java</artifactId>
+	<version>0.1</version>
+</dependency>
+```
+
+### Gradle
+
+```
+compile "com.fire:fire-business-api-java:0.1"
+```
+
+## Usage
 Configure the API client with your API Token credentials. 
 
 ```java
