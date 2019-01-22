@@ -1,7 +1,7 @@
 # fire-business-api-java
 A Java SDK for the Fire Business API
 
-[![Release Artifacts][Badge-Maven]]
+![Release Artifacts][Badge-Maven]
 
 Configure the API client with your API Token credentials. 
 
