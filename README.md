@@ -1,6 +1,8 @@
 # fire-business-api-java
 A Java SDK for the Fire Business API
 
+[![Release Artifacts][Badge-SonatypeReleases]][Link-SonatypeReleases]
+
 Configure the API client with your API Token credentials. 
 
 ```java
@@ -189,4 +191,7 @@ logger.info("Batch Items: {}", items.getBatchItems());
 api.send(new BatchSubmitRequest().setBatchUuid(batchUuid));
 ```
  
+[Link-SonatypeReleases]: https://oss.sonatype.org/content/repositories/releases/com/fire/fire-business-api-java_0.1/ "Sonatype Releases"
+[Badge-SonatypeReleases]: https://img.shields.io/nexus/r/https/oss.sonatype.org/com.fire/fire-business-api-java_0.1.svg "Sonatype Releases"
+
  
