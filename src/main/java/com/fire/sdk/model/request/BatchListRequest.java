@@ -75,7 +75,7 @@ public class BatchListRequest implements Request<BatchListRequest, BatchListResp
      * <li>REJECTED
      * </ul>
      * 
-     * @param batchTypes a String[] array containing the batch statuses to return.
+     * @param batchStatuses a String[] array containing the batch statuses to return.
      * @return the batch list request object for chaining
      */
     public BatchListRequest setBatchStatuses(BatchStatus[] batchStatuses) {
