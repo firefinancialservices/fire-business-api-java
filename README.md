@@ -209,6 +209,13 @@ logger.info("Batch Items: {}", items.getBatchItems());
 api.send(new BatchSubmitRequest().setBatchUuid(batchUuid));
 ```
  
-[Badge-Sonatype]: https://img.shields.io/nexus/r/https/oss.sonatype.org/com.fire/fire-business-api-java.svg "Sonatype Releases"
 
+ # Developing
+ 
+ To create a new release to the maven repository, ensure that the pom version is updated and not a SNAPSHOP, and use `mvn deploy`. 
+ 
+ [Deploying to OSSRH with Apache Maven](https://central.sonatype.org/pages/apache-maven.html)
+ 
+ 
+ [Badge-Sonatype]: https://img.shields.io/nexus/r/https/oss.sonatype.org/com.fire/fire-business-api-java.svg "Sonatype Releases"
  
