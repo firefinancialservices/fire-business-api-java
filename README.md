@@ -17,7 +17,7 @@ A Java SDK for the Fire Business API
 ### Gradle
 
 ```
-compile "com.fire:fire-business-api-java:0.1"
+compile group: 'com.fire', name: 'fire-business-api-java', version: '0.1'
 ```
 
 ## Usage
