@@ -7,10 +7,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fire.sdk.http.HttpConfiguration;
-import com.fire.sdk.model.Batch.BatchStatus;
 import com.fire.sdk.model.Credentials;
-import com.fire.sdk.model.request.BatchListRequest;
-import com.fire.sdk.model.response.BatchListResponse;
+import com.fire.sdk.model.request.ActivitiesListRequest;
+import com.fire.sdk.model.request.CardListRequest;
+import com.fire.sdk.model.request.CardTransactionListRequest;
+import com.fire.sdk.model.request.UserAddressRequest;
+import com.fire.sdk.model.request.UserListRequest;
+import com.fire.sdk.model.request.UserRequest;
+import com.fire.sdk.model.response.ActivitiesListResponse;
+import com.fire.sdk.model.response.CardListResponse;
+import com.fire.sdk.model.response.UserAddressResponse;
+import com.fire.sdk.model.response.UserListResponse;
+import com.fire.sdk.model.response.UserResponse;
 
 public class FireBusinessAPITest {
 
@@ -44,20 +52,30 @@ public class FireBusinessAPITest {
 		FireBusinessAPI api = new FireBusinessAPI(config).initialise(credentials);
 
 		
+		CardListResponse cardList = api.send(new CardListRequest());
+//		api.send(new CardTransactionListRequest()
+//	                  .setCardId(51l)
+//	                  .setLimit(25)
+//	                  .setOffset(0)
+//	                  );
 	
+		UserListResponse users = api.send(new UserListRequest());
+		UserResponse user = api.send(new UserRequest().setUserId(3138l));
+		UserAddressResponse address = api.send(new UserAddressRequest().setUserId(3138l));
+		
         // Activities
-//        
-//		ActivitiesListResponse activities = api.send(new ActivitiesListRequest());
-//		
-//		for (int i=0; i<10; i++) {
-//		    logger.info("{}: {}", String.format("%-35s", activities.getActivities().get(i).getType()), activities.getActivities().get(i).getDescription());
-//		}
+        
+		ActivitiesListResponse activities = api.send(new ActivitiesListRequest());
+		
+		for (int i=0; i<10; i++) {
+		    logger.info("{}: {}", String.format("%-35s", activities.getActivities().get(i).getType()), activities.getActivities().get(i).getDescription());
+		}
         
 		
 		
-		BatchListResponse batches = api.send(new BatchListRequest().setBatchStatuses(new BatchStatus[] { BatchStatus.PENDING_APPROVAL, BatchStatus.PENDING_PARENT_BATCH_APPROVAL }));
-		logger.info("Batch 0 = {}", batches.getBatches().get(0).getBatchName());
-		
+//		BatchListResponse batches = api.send(new BatchListRequest().setBatchStatuses(new BatchStatus[] { BatchStatus.PENDING_APPROVAL, BatchStatus.PENDING_PARENT_BATCH_APPROVAL }));
+//		logger.info("Batch 0 = {}", batches.getBatches().get(0).getBatchName());
+
 
 //		BatchNewRequest newBatchRequest = new BatchNewRequest();
 //		newBatchRequest.setBatch(new Batch()
@@ -104,8 +122,7 @@ public class FireBusinessAPITest {
 //		MandateResponse mandate = api.send(new MandateRequest().setMandateUuid(mandateUuid));
 //		DirectDebitListResponse directdebits = api.send(new DirectDebitListRequest().setMandateUuid(mandateUuid));
 //		
-//	
-		
+//			
 //		ActivitiesListResponse activitiesList = api.send(new ActivitiesListRequest());
 //		logger.info("Activity 0 = {}", activitiesList.getActivities().get(0).getDescription());
 //		

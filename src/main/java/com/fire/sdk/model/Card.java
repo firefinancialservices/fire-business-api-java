@@ -11,6 +11,59 @@ public class Card {
     private String lastName;
     private String businessName;
     private Date expiryDate;
+    private Boolean blocked;
+    private String dateCreated;
+    private Long eurIcan;
+    private Long gbpIcan;
+    private String status;
+    private String statusReason;
+    private Long userId;
+    
+    
+    
+    
+    public Boolean getBlocked() {
+        return blocked;
+    }
+    public void setBlocked(Boolean blocked) {
+        this.blocked = blocked;
+    }
+    public String getDateCreated() {
+        return dateCreated;
+    }
+    public void setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+    public Long getEurIcan() {
+        return eurIcan;
+    }
+    public void setEurIcan(Long eurIcan) {
+        this.eurIcan = eurIcan;
+    }
+    public Long getGbpIcan() {
+        return gbpIcan;
+    }
+    public void setGbpIcan(Long gbpIcan) {
+        this.gbpIcan = gbpIcan;
+    }
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    public String getStatusReason() {
+        return statusReason;
+    }
+    public void setStatusReason(String statusReason) {
+        this.statusReason = statusReason;
+    }
+    public Long getUserId() {
+        return userId;
+    }
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
     public long getCardId() {
         return cardId;
     }
