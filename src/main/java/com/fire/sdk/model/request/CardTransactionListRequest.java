@@ -46,7 +46,7 @@ public class CardTransactionListRequest implements Request<CardTransactionListRe
             queryString = "?" + sb.substring(0, end);
         }
 
-        return "cards/" + getCardId() + "/transactions" + queryString;
+        return "me/cards/" + getCardId() + "/transactions" + queryString;
         
     }
 

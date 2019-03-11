@@ -53,11 +53,11 @@ public class FireBusinessAPITest {
 
 		
 		CardListResponse cardList = api.send(new CardListRequest());
-//		api.send(new CardTransactionListRequest()
-//	                  .setCardId(51l)
-//	                  .setLimit(25)
-//	                  .setOffset(0)
-//	                  );
+		api.send(new CardTransactionListRequest()
+	                  .setCardId(51l)
+	                  .setLimit(25)
+	                  .setOffset(0)
+	                  );
 	
 		UserListResponse users = api.send(new UserListRequest());
 		UserResponse user = api.send(new UserRequest().setUserId(3138l));
