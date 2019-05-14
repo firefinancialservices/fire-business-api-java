@@ -7,14 +7,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fire.sdk.http.HttpConfiguration;
+import com.fire.sdk.model.Batch;
 import com.fire.sdk.model.Credentials;
+import com.fire.sdk.model.InternalTransfer;
 import com.fire.sdk.model.request.ActivitiesListRequest;
+import com.fire.sdk.model.request.BatchAddItemRequest;
+import com.fire.sdk.model.request.BatchListItemsRequest;
+import com.fire.sdk.model.request.BatchNewRequest;
+import com.fire.sdk.model.request.BatchSubmitRequest;
 import com.fire.sdk.model.request.CardListRequest;
 import com.fire.sdk.model.request.CardTransactionListRequest;
 import com.fire.sdk.model.request.UserAddressRequest;
 import com.fire.sdk.model.request.UserListRequest;
 import com.fire.sdk.model.request.UserRequest;
 import com.fire.sdk.model.response.ActivitiesListResponse;
+import com.fire.sdk.model.response.BatchAddItemResponse;
+import com.fire.sdk.model.response.BatchListItemsResponse;
+import com.fire.sdk.model.response.BatchNewResponse;
 import com.fire.sdk.model.response.CardListResponse;
 import com.fire.sdk.model.response.UserAddressResponse;
 import com.fire.sdk.model.response.UserListResponse;
@@ -77,19 +86,19 @@ public class FireBusinessAPITest {
 //		logger.info("Batch 0 = {}", batches.getBatches().get(0).getBatchName());
 
 
-//		BatchNewRequest newBatchRequest = new BatchNewRequest();
-//		newBatchRequest.setBatch(new Batch()
-//		    .setType(Batch.BatchType.BANK_TRANSFER)
-//		    .setCurrency("EUR")
-//		    .setBatchName("Java SDK test")
-//		    .setJobNumber("2019-01-09")
-//		    .setCallbackUrl("https://requestbin.foursevensix.com/1fqnqjm1")
-//		);
-//		
-//		BatchNewResponse newBatch = api.send(newBatchRequest);
-//		logger.info("New batch ID = {}", newBatch.getBatchUuid());
-//
-//		String batchUuid = newBatch.getBatchUuid();
+		BatchNewRequest newBatchRequest = new BatchNewRequest();
+		newBatchRequest.setBatch(new Batch()
+		    .setType(Batch.BatchType.INTERNAL_TRANSFER)
+		    .setCurrency("EUR")
+		    .setBatchName("SDK FX test")
+		    .setJobNumber("2019-03-13")
+		    .setCallbackUrl("https://requestbin.foursevensix.com/18t9f6l1")
+		);
+		
+		BatchNewResponse newBatch = api.send(newBatchRequest);
+		logger.info("New batch ID = {}", newBatch.getBatchUuid());
+
+		String batchUuid = newBatch.getBatchUuid();
 //		
 //		BankTransfer bankTransfer = new BankTransfer()
 //        	.setAmount(1000L)
@@ -101,20 +110,20 @@ public class FireBusinessAPITest {
 //        	.setYourRef("From API");
 //
 //				                
-//		InternalTransfer internalTransfer = new InternalTransfer()
-//    		.setAmount(500L)
-//    		.setIcanFrom(5532L)
-//    		.setIcanTo(2150L)
-//    		.setRef("Testing Java SDK");
+		InternalTransfer internalTransfer = new InternalTransfer()
+    		.setAmount(100L)
+    		.setIcanFrom(2150L)
+    		.setIcanTo(5532L)
+    		.setRef("Testing Java SDK");
 //		
 //		BatchAddItemResponse newItem = api.send(new BatchAddItemRequest().setBatchUuid(batchUuid).setBatchItem(bankTransfer));
-//		BatchAddItemResponse newItem = api.send(new BatchAddItemRequest().setBatchUuid(batchUuid).setBatchItem(internalTransfer));
-//		logger.info("New batch item ID = {}", newItem.getBatchItemUuid());
+		BatchAddItemResponse newItem = api.send(new BatchAddItemRequest().setBatchUuid(batchUuid).setBatchItem(internalTransfer));
+		logger.info("New batch item ID = {}", newItem.getBatchItemUuid());
 //	
-//		BatchListItemsResponse items = api.send(new BatchListItemsRequest().setBatchUuid(batchUuid).setBatchType(Batch.BatchType.INTERNAL_TRANSFER));
+		BatchListItemsResponse items = api.send(new BatchListItemsRequest().setBatchUuid(batchUuid).setBatchType(Batch.BatchType.INTERNAL_TRANSFER));
 //		BatchListItemsResponse items = api.send(new BatchListItemsRequest().setBatchUuid(batchUuid).setBatchType(Batch.BatchType.BANK_TRANSFER));
 //        
-//		api.send(new BatchSubmitRequest().setBatchUuid(batchUuid));
+		api.send(new BatchSubmitRequest().setBatchUuid(batchUuid));
 		
     
 //		MandateListResponse mandateList = api.send(new MandateListRequest());
