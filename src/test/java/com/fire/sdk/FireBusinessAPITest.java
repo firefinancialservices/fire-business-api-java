@@ -10,24 +10,16 @@ import com.fire.sdk.http.HttpConfiguration;
 import com.fire.sdk.model.Batch;
 import com.fire.sdk.model.Credentials;
 import com.fire.sdk.model.InternalTransfer;
-import com.fire.sdk.model.request.ActivitiesListRequest;
 import com.fire.sdk.model.request.BatchAddItemRequest;
 import com.fire.sdk.model.request.BatchListItemsRequest;
 import com.fire.sdk.model.request.BatchNewRequest;
 import com.fire.sdk.model.request.BatchSubmitRequest;
+import com.fire.sdk.model.request.CardActionsRequest;
 import com.fire.sdk.model.request.CardListRequest;
-import com.fire.sdk.model.request.CardTransactionListRequest;
-import com.fire.sdk.model.request.UserAddressRequest;
-import com.fire.sdk.model.request.UserListRequest;
-import com.fire.sdk.model.request.UserRequest;
-import com.fire.sdk.model.response.ActivitiesListResponse;
 import com.fire.sdk.model.response.BatchAddItemResponse;
 import com.fire.sdk.model.response.BatchListItemsResponse;
 import com.fire.sdk.model.response.BatchNewResponse;
 import com.fire.sdk.model.response.CardListResponse;
-import com.fire.sdk.model.response.UserAddressResponse;
-import com.fire.sdk.model.response.UserListResponse;
-import com.fire.sdk.model.response.UserResponse;
 
 public class FireBusinessAPITest {
 
@@ -62,24 +54,26 @@ public class FireBusinessAPITest {
 
 		
 		CardListResponse cardList = api.send(new CardListRequest());
-		api.send(new CardTransactionListRequest()
-	                  .setCardId(51l)
-	                  .setLimit(25)
-	                  .setOffset(0)
-	                  );
-	
-		UserListResponse users = api.send(new UserListRequest());
-		UserResponse user = api.send(new UserRequest().setUserId(3138l));
-		UserAddressResponse address = api.send(new UserAddressRequest().setUserId(3138l));
+		api.send(new CardActionsRequest().setCardId(2645l).block());
 		
-        // Activities
-        
-		ActivitiesListResponse activities = api.send(new ActivitiesListRequest());
-		
-		for (int i=0; i<10; i++) {
-		    logger.info("{}: {}", String.format("%-35s", activities.getActivities().get(i).getType()), activities.getActivities().get(i).getDescription());
-		}
-        
+//		api.send(new CardTransactionListRequest()
+//	                  .setCardId(51l)
+//	                  .setLimit(25)
+//	                  .setOffset(0)
+//	                  );
+//	
+//		UserListResponse users = api.send(new UserListRequest());
+//		UserResponse user = api.send(new UserRequest().setUserId(3138l));
+//		UserAddressResponse address = api.send(new UserAddressRequest().setUserId(3138l));
+//		
+//        // Activities
+//        
+//		ActivitiesListResponse activities = api.send(new ActivitiesListRequest());
+//		
+//		for (int i=0; i<10; i++) {
+//		    logger.info("{}: {}", String.format("%-35s", activities.getActivities().get(i).getType()), activities.getActivities().get(i).getDescription());
+//		}
+//        
 		
 		
 //		BatchListResponse batches = api.send(new BatchListRequest().setBatchStatuses(new BatchStatus[] { BatchStatus.PENDING_APPROVAL, BatchStatus.PENDING_PARENT_BATCH_APPROVAL }));
