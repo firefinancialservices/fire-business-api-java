@@ -7,19 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fire.sdk.http.HttpConfiguration;
-import com.fire.sdk.model.Batch;
 import com.fire.sdk.model.Credentials;
-import com.fire.sdk.model.InternalTransfer;
-import com.fire.sdk.model.request.BatchAddItemRequest;
-import com.fire.sdk.model.request.BatchListItemsRequest;
-import com.fire.sdk.model.request.BatchNewRequest;
-import com.fire.sdk.model.request.BatchSubmitRequest;
+import com.fire.sdk.model.request.AccountActionsRequest;
 import com.fire.sdk.model.request.CardActionsRequest;
-import com.fire.sdk.model.request.CardListRequest;
-import com.fire.sdk.model.response.BatchAddItemResponse;
-import com.fire.sdk.model.response.BatchListItemsResponse;
-import com.fire.sdk.model.response.BatchNewResponse;
-import com.fire.sdk.model.response.CardListResponse;
 
 public class FireBusinessAPITest {
 
@@ -52,9 +42,23 @@ public class FireBusinessAPITest {
 		
 		FireBusinessAPI api = new FireBusinessAPI(config).initialise(credentials);
 
+		//api.send(new AccountRequest().setAccountId(2150l));
+		api.send(new AccountActionsRequest().setAccountId(5532l).setAlias("Second Account"));
 		
-		CardListResponse cardList = api.send(new CardListRequest());
-		api.send(new CardActionsRequest().setCardId(2645l).block());
+		//CardListResponse cardList = api.send(new CardListRequest());
+		//api.send(new CardActionsRequest().setCardId(2645l).unblock());
+		
+//		PayeeListResponse payeeList = api.send(new PayeeListRequest());
+		
+//		AccountTransactionListResponse transactions = null;
+//        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//        try {
+//            transactions = api.send(new AccountTransactionListRequest().setAccountId(2150l)
+//                            .setDateRangeFrom(df.parse("2019-01-01")).setDateRangeTo(df.parse("2019-05-31")));
+//        } catch (ParseException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
 		
 //		api.send(new CardTransactionListRequest()
 //	                  .setCardId(51l)
@@ -80,19 +84,19 @@ public class FireBusinessAPITest {
 //		logger.info("Batch 0 = {}", batches.getBatches().get(0).getBatchName());
 
 
-		BatchNewRequest newBatchRequest = new BatchNewRequest();
-		newBatchRequest.setBatch(new Batch()
-		    .setType(Batch.BatchType.INTERNAL_TRANSFER)
-		    .setCurrency("EUR")
-		    .setBatchName("SDK FX test")
-		    .setJobNumber("2019-03-13")
-		    .setCallbackUrl("https://requestbin.foursevensix.com/18t9f6l1")
-		);
-		
-		BatchNewResponse newBatch = api.send(newBatchRequest);
-		logger.info("New batch ID = {}", newBatch.getBatchUuid());
-
-		String batchUuid = newBatch.getBatchUuid();
+//		BatchNewRequest newBatchRequest = new BatchNewRequest();
+//		newBatchRequest.setBatch(new Batch()
+//		    .setType(Batch.BatchType.INTERNAL_TRANSFER)
+//		    .setCurrency("EUR")
+//		    .setBatchName("SDK FX test")
+//		    .setJobNumber("2019-03-13")
+//		    .setCallbackUrl("https://requestbin.foursevensix.com/18t9f6l1")
+//		);
+//		
+//		BatchNewResponse newBatch = api.send(newBatchRequest);
+//		logger.info("New batch ID = {}", newBatch.getBatchUuid());
+//
+//		String batchUuid = newBatch.getBatchUuid();
 //		
 //		BankTransfer bankTransfer = new BankTransfer()
 //        	.setAmount(1000L)
@@ -104,20 +108,20 @@ public class FireBusinessAPITest {
 //        	.setYourRef("From API");
 //
 //				                
-		InternalTransfer internalTransfer = new InternalTransfer()
-    		.setAmount(100L)
-    		.setIcanFrom(2150L)
-    		.setIcanTo(5532L)
-    		.setRef("Testing Java SDK");
+//		InternalTransfer internalTransfer = new InternalTransfer()
+//    		.setAmount(100L)
+//    		.setIcanFrom(2150L)
+//    		.setIcanTo(5532L)
+//    		.setRef("Testing Java SDK");
 //		
 //		BatchAddItemResponse newItem = api.send(new BatchAddItemRequest().setBatchUuid(batchUuid).setBatchItem(bankTransfer));
-		BatchAddItemResponse newItem = api.send(new BatchAddItemRequest().setBatchUuid(batchUuid).setBatchItem(internalTransfer));
-		logger.info("New batch item ID = {}", newItem.getBatchItemUuid());
+//		BatchAddItemResponse newItem = api.send(new BatchAddItemRequest().setBatchUuid(batchUuid).setBatchItem(internalTransfer));
+//		logger.info("New batch item ID = {}", newItem.getBatchItemUuid());
 //	
-		BatchListItemsResponse items = api.send(new BatchListItemsRequest().setBatchUuid(batchUuid).setBatchType(Batch.BatchType.INTERNAL_TRANSFER));
+//		BatchListItemsResponse items = api.send(new BatchListItemsRequest().setBatchUuid(batchUuid).setBatchType(Batch.BatchType.INTERNAL_TRANSFER));
 //		BatchListItemsResponse items = api.send(new BatchListItemsRequest().setBatchUuid(batchUuid).setBatchType(Batch.BatchType.BANK_TRANSFER));
 //        
-		api.send(new BatchSubmitRequest().setBatchUuid(batchUuid));
+//		api.send(new BatchSubmitRequest().setBatchUuid(batchUuid));
 		
     
 //		MandateListResponse mandateList = api.send(new MandateListRequest());

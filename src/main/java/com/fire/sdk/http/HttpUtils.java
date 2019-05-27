@@ -168,7 +168,7 @@ public class HttpUtils {
             }
             
             int statusCode = (httpResponse.getStatusLine().getStatusCode());
-            if (statusCode != HttpStatus.SC_OK && statusCode != HttpStatus.SC_ACCEPTED && statusCode != HttpStatus.SC_CREATED) {
+            if (statusCode != HttpStatus.SC_OK && statusCode != HttpStatus.SC_ACCEPTED && statusCode != HttpStatus.SC_CREATED && statusCode != HttpStatus.SC_NO_CONTENT) {
                 throw new FireException("Unexpected http status code [" + statusCode + "]");
             }
 
