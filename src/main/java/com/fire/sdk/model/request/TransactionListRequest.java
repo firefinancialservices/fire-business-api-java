@@ -17,7 +17,29 @@ public class TransactionListRequest implements Request<TransactionListRequest, T
     private int offset;
     private Date dateRangeFrom;
     private Date dateRangeTo;
+    private TransactionTypes[] transactionTypes;
 
+    public static enum TransactionTypes {
+        CARD_POS_CONTACT_DEBIT,
+        CARD_POS_CONTACT_CREDIT,
+        CARD_POS_CONTACTLESS_DEBIT,
+        CARD_POS_CONTACTLESS_CREDIT,
+        CARD_ECOMMERCE_DEBIT,
+        CARD_ECOMMERCE_CREDIT,
+        CARD_ATM_DEBIT,
+        CARD_ATM_CREDIT,
+        CARD_POS_CONTACT_DEBIT_REVERSAL,
+        CARD_POS_CONTACT_CREDIT_REVERSAL,
+        CARD_POS_CONTACTLESS_DEBIT_REVERSAL,
+        CARD_POS_CONTACTLESS_CREDIT_REVERSAL,
+        CARD_ECOMMERCE_DEBIT_REVERSAL,
+        CARD_ECOMMERCE_CREDIT_REVERSAL,
+        CARD_ATM_DEBIT_REVERSAL,
+        CARD_ATM_CREDIT_REVERSAL,
+        CARD_MESSAGE_REVERSED_DEBIT,
+        CARD_MESSAGE_REVERSED_CREDIT
+    }
+    
     @Override
     public String getEndpoint() {
         ArrayList<String> queryStrings = new ArrayList<String>();
@@ -37,6 +59,13 @@ public class TransactionListRequest implements Request<TransactionListRequest, T
         
         if (getOffset() != 0) {
             queryStrings.add("offset=" + getOffset());
+        }
+        
+        if (getTransactionTypes().length != 0) {
+            
+            for (int i = 0; i< getTransactionTypes().length; i++) {
+                queryStrings.add("transactionTypes=" + transactionTypes[i].toString());
+            }
         }
         
         if (queryStrings.size() > 0) {
@@ -67,6 +96,14 @@ public class TransactionListRequest implements Request<TransactionListRequest, T
 		return TransactionListResponse.class;
 	}
 	
+    public TransactionTypes[] getTransactionTypes() {
+        return transactionTypes;
+    }
+
+    public void setTransactionTypes(TransactionTypes[] transactionTypes) {
+        this.transactionTypes = transactionTypes;
+    }
+
     public int getLimit() {
         return limit;
     }

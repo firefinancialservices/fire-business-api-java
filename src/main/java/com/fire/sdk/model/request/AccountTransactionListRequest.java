@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import com.fire.sdk.FireException;
 import com.fire.sdk.http.HttpUtils;
 import com.fire.sdk.model.Request;
+import com.fire.sdk.model.request.TransactionListRequest.TransactionTypes;
 import com.fire.sdk.model.response.AccountTransactionListResponse;
 
 public class AccountTransactionListRequest implements Request<AccountTransactionListRequest, AccountTransactionListResponse> {
@@ -20,7 +21,28 @@ public class AccountTransactionListRequest implements Request<AccountTransaction
     private Date dateRangeFrom;
     private Date dateRangeTo;
     private String searchKeyword;
-    private String[] transactionTypes;
+    private TransactionTypes[] transactionTypes;
+
+    public static enum TransactionTypes {
+        CARD_POS_CONTACT_DEBIT,
+        CARD_POS_CONTACT_CREDIT,
+        CARD_POS_CONTACTLESS_DEBIT,
+        CARD_POS_CONTACTLESS_CREDIT,
+        CARD_ECOMMERCE_DEBIT,
+        CARD_ECOMMERCE_CREDIT,
+        CARD_ATM_DEBIT,
+        CARD_ATM_CREDIT,
+        CARD_POS_CONTACT_DEBIT_REVERSAL,
+        CARD_POS_CONTACT_CREDIT_REVERSAL,
+        CARD_POS_CONTACTLESS_DEBIT_REVERSAL,
+        CARD_POS_CONTACTLESS_CREDIT_REVERSAL,
+        CARD_ECOMMERCE_DEBIT_REVERSAL,
+        CARD_ECOMMERCE_CREDIT_REVERSAL,
+        CARD_ATM_DEBIT_REVERSAL,
+        CARD_ATM_CREDIT_REVERSAL,
+        CARD_MESSAGE_REVERSED_DEBIT,
+        CARD_MESSAGE_REVERSED_CREDIT
+    }
     
 
     @Override
@@ -53,8 +75,8 @@ public class AccountTransactionListRequest implements Request<AccountTransaction
         }
         
         if (getTransactionTypes() != null) {
-            for (String tt : getTransactionTypes()) {
-                queryStrings.add("transactionTypes=" + tt);
+            for (TransactionTypes tt : getTransactionTypes()) {
+                queryStrings.add("transactionTypes=" + tt.toString());
             }
         }
         
@@ -140,11 +162,11 @@ public class AccountTransactionListRequest implements Request<AccountTransaction
         return this;
     }
 
-    public String[] getTransactionTypes() {
+    public TransactionTypes[] getTransactionTypes() {
         return transactionTypes;
     }
 
-    public AccountTransactionListRequest setTransactionTypes(String[] transactionTypes) {
+    public AccountTransactionListRequest setTransactionTypes(TransactionTypes[] transactionTypes) {
         this.transactionTypes = transactionTypes;
         return this;
     }

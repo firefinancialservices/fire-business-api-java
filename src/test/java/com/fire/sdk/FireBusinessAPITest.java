@@ -1,6 +1,9 @@
 package com.fire.sdk;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 import org.slf4j.Logger;
@@ -8,8 +11,9 @@ import org.slf4j.LoggerFactory;
 
 import com.fire.sdk.http.HttpConfiguration;
 import com.fire.sdk.model.Credentials;
-import com.fire.sdk.model.request.AccountActionsRequest;
-import com.fire.sdk.model.request.CardActionsRequest;
+import com.fire.sdk.model.request.AccountTransactionListRequest;
+import com.fire.sdk.model.request.AccountTransactionListRequest.TransactionTypes;
+import com.fire.sdk.model.response.AccountTransactionListResponse;
 
 public class FireBusinessAPITest {
 
@@ -42,23 +46,24 @@ public class FireBusinessAPITest {
 		
 		FireBusinessAPI api = new FireBusinessAPI(config).initialise(credentials);
 
-		//api.send(new AccountRequest().setAccountId(2150l));
-		api.send(new AccountActionsRequest().setAccountId(5532l).setAlias("Second Account"));
+//		api.send(new AccountRequest().setAccountId(2150l));
+//		api.send(new AccountActionsRequest().setAccountId(5532l).setAlias("Second Account"));
 		
 		//CardListResponse cardList = api.send(new CardListRequest());
 		//api.send(new CardActionsRequest().setCardId(2645l).unblock());
 		
 //		PayeeListResponse payeeList = api.send(new PayeeListRequest());
 		
-//		AccountTransactionListResponse transactions = null;
-//        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-//        try {
-//            transactions = api.send(new AccountTransactionListRequest().setAccountId(2150l)
-//                            .setDateRangeFrom(df.parse("2019-01-01")).setDateRangeTo(df.parse("2019-05-31")));
-//        } catch (ParseException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
+		AccountTransactionListResponse transactions = null;
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            transactions = api.send(new AccountTransactionListRequest().setAccountId(2150l)
+                            .setDateRangeFrom(df.parse("2019-01-01")).setDateRangeTo(df.parse("2019-05-31"))
+                            .setTransactionTypes(new AccountTransactionListRequest.TransactionTypes[] { TransactionTypes.CARD_ECOMMERCE_DEBIT } ));
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 		
 //		api.send(new CardTransactionListRequest()
 //	                  .setCardId(51l)
