@@ -79,10 +79,12 @@ public class HttpUtils {
             
             @Override
             public void process(HttpRequest request, HttpContext context) throws HttpException, IOException {
+
                 logger.info(">>>> REQUEST HEADERS >>>>");
                 logger.info(">  {}", request.getRequestLine());
                 for (Header header : request.getAllHeaders()) {
-                   logger.info(">  {}: {}", header.getName(), header.getValue()); 
+                   logger.info(">  {}: {}", header.getName(), header.getValue());
+
                 }
                 logger.info("");
                 
