@@ -1,5 +1,7 @@
 package com.fire.sdk.model;
 
+import oracle.jrockit.jfr.StringConstantPool;
+
 public class PaymentRequestPayment {
     private String aspspUuid;
     private String currency;
@@ -7,6 +9,46 @@ public class PaymentRequestPayment {
     private String myRef;
     private String returnUrl;
     private OrderDetails orderDetails;
+    private String paymentUuid;
+    private String redirectUrl;
+    private String status;
+    private String dateCreated;
+
+    public String getPaymentUuid() {
+        return paymentUuid;
+    }
+
+    public PaymentRequestPayment setPaymentUuid(String paymentUuid) {
+        this.paymentUuid = paymentUuid;
+        return this;
+    }
+
+    public String getRedirectUrl() {
+        return redirectUrl;
+    }
+
+    public PaymentRequestPayment setRedirectUrl(String redirectUrl) {
+        this.redirectUrl = redirectUrl;
+        return this;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public PaymentRequestPayment setStatus(String status) {
+        this.status = status;
+        return this;
+    }
+
+    public String getDateCreated() {
+        return dateCreated;
+    }
+
+    public PaymentRequestPayment setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
+        return this;
+    }
 
     public String getAspspUuid() {
         return aspspUuid;

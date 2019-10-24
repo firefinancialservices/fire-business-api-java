@@ -61,7 +61,7 @@ public class FireBusinessAPITest {
 		logger.debug("ClientId {}", prop.getProperty("clientId"));
 		
 		HttpConfiguration config = new HttpConfiguration();
-		config.setEndpoint("https://api-preprod.fire.com/business/v1");
+//		config.setEndpoint("https://api-preprod.fire.com/business/v1");
 		
 		FireBusinessAPI api = new FireBusinessAPI(config).initialise(credentials);
 
@@ -73,24 +73,24 @@ public class FireBusinessAPITest {
 		
 //		PayeeListResponse payeeList = api.send(new PayeeListRequest());
 //
-// 		PaymentRequestListResponse paymentRequestListResponse = api.send(new PaymentRequestListRequest());
+ 		PaymentRequestListResponse paymentRequestListResponse = api.send(new PaymentRequestListRequest());
 
-//		PaymentRequest paymentRequest = new PaymentRequest()
-//				.setIcanTo(1520l) // 1519 - EUR, 1520 - GBP
-//				.setAmount(10l)
-//				.setCurrency("GBP")
-//				.setType("PARTY_TO_PARTY")
-//				.setDescription("Testing the API")
-//				.setMyRef("Test")
-//				.setMaxNumberCustomerPayments(1)
-//				.setMaxNumberPayments(1)
-//				.setReturnUrl("https://forgerock.foursevensix.com/shelterapi/callback")
-//				.setOrderDetails(new OrderDetails()
-//					.setOrderId("orderid123")
-//				)
-//				;
-//		PaymentRequestNewResponse paymentRequestNewResponse = api.send(new PaymentRequestNewRequest().setPaymentRequest(paymentRequest));
-//
+		PaymentRequest paymentRequest = new PaymentRequest()
+				.setIcanTo(2152l) // 2150 - EUR, 2152 - GBP
+				.setAmount(10l)
+				.setCurrency("GBP")
+				.setType("PARTY_TO_PARTY")
+				.setDescription("Testing the API")
+				.setMyRef("Test")
+				.setMaxNumberCustomerPayments(1)
+				.setMaxNumberPayments(1)
+				.setReturnUrl("https://forgerock.foursevensix.com/shelterapi/callback")
+				.setOrderDetails(new OrderDetails()
+					.setOrderId("orderid123")
+				)
+				;
+		PaymentRequestNewResponse paymentRequestNewResponse = api.send(new PaymentRequestNewRequest().setPaymentRequest(paymentRequest));
+
 
 
 		HashMap<String, String> aspsps = new HashMap<>();
@@ -128,8 +128,8 @@ public class FireBusinessAPITest {
 
 
 		PaymentRequestPaymentNewResponse paymentRequestPaymentNewResponse = api.send(new PaymentRequestPaymentNewRequest()
-				.setPaymentRequestCode("hnejan93") // hnejan93 - EUR // wppkqwhc - GBP
-				.setPaymentRequestPayment(new PaymentRequestPayment().setAspspUuid("1731af71-1f87-466d-82ea-d974a92d2004"))
+				.setPaymentRequestCode(paymentRequestNewResponse.getCode()) // hnejan93 - EUR // wppkqwhc - GBP
+				.setPaymentRequestPayment(new PaymentRequestPayment().setAspspUuid("105cbaf1-8a49-4c99-8205-928ea4014d9f"))
 		);
 
 		
