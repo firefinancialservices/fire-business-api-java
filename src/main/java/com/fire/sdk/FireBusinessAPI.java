@@ -346,6 +346,7 @@ public class FireBusinessAPI {
 	    U response = null;
 
 	    if (mAccessTokenExpiry != null && new Date().after(mAccessTokenExpiry)) {
+	    	mAccessTokenExpiry = null;
 	    	initialise(this.mCredentials);
 		}
 	    
