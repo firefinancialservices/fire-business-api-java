@@ -12,6 +12,10 @@ import com.fire.sdk.model.Response;
 import com.fire.sdk.model.request.AccessTokenRequest;
 import com.fire.sdk.model.response.AccessTokenResponse;
 
+import java.time.DateTimeException;
+import java.time.OffsetDateTime;
+import java.util.Date;
+
 /**
  * A Java SDK for the Fire Business API.
  * <p>
@@ -211,6 +215,7 @@ public class FireBusinessAPI {
     private static final Logger logger = LoggerFactory.getLogger(FireBusinessAPI.class);
     private String mAccessToken;
     private Credentials mCredentials;
+    private Date mAccessTokenExpiry;
 
 	/**
 	 * Logger 
@@ -314,7 +319,8 @@ public class FireBusinessAPI {
 	    AccessTokenRequest accessToken = new AccessTokenRequest().intialise(mCredentials);    
 	    AccessTokenResponse accessTokenResponse = this.send(accessToken);
 	    this.mAccessToken = accessTokenResponse.getAccessToken();
-	    
+	    this.mAccessTokenExpiry = accessTokenResponse.getExpiry();
+
 	    return this;
 	    
 	}
@@ -339,7 +345,10 @@ public class FireBusinessAPI {
 	 public <T, U extends Response<U>> U send(Request<T, U> request) {
 	    U response = null;
 
-		
+	    if (mAccessTokenExpiry != null && new Date().after(mAccessTokenExpiry)) {
+	    	initialise(this.mCredentials);
+		}
+	    
 		if (request.getMethod() == HttpUtils.HttpMethod.POST) {
 		    response = HttpUtils.sendPostMessage(request, this.mAccessToken, httpClient, httpConfiguration);
 		} else if (request.getMethod() == HttpUtils.HttpMethod.PUT) {
