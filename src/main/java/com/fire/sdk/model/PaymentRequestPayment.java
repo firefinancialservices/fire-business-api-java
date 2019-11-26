@@ -1,6 +1,5 @@
 package com.fire.sdk.model;
 
-import oracle.jrockit.jfr.StringConstantPool;
 
 public class PaymentRequestPayment {
     private String aspspUuid;
