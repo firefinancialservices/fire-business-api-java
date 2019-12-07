@@ -3,7 +3,7 @@ package com.fire.sdk.model;
 
 public class PaymentRequestPayment {
     private String aspspUuid;
-    private String currency;
+    private Currency currency;
     private Long amount;
     private String myRef;
     private String returnUrl;
@@ -58,11 +58,11 @@ public class PaymentRequestPayment {
         return this;
     }
 
-    public String getCurrency() {
+    public Currency getCurrency() {
         return currency;
     }
 
-    public PaymentRequestPayment setCurrency(String currency) {
+    public PaymentRequestPayment setCurrency(Currency currency) {
         this.currency = currency;
         return this;
     }
