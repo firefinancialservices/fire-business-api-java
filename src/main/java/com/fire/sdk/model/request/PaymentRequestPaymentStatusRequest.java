@@ -26,7 +26,7 @@ public class PaymentRequestPaymentStatusRequest implements Request<PaymentReques
         if (getPaymentUuid() == null) {
             throw new FireException("You must setPaymentUuid() first!");
         }
-		return "paymentrequests/payments/" + getPaymentUuid();
+		return "payments/" + getPaymentUuid();
 	}
 
     @Override
