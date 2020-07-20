@@ -8,7 +8,6 @@ public class BatchItem {
     private Result result;
     private Date dateCreated;
     private Date lastUpdated;
-
     
     public Result getResult() {
         return result;

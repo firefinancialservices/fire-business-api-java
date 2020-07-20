@@ -8,10 +8,14 @@ import com.fire.sdk.model.Batch;
 import com.fire.sdk.model.Request;
 import com.fire.sdk.model.response.BatchListItemsResponse;
 
+import java.util.ArrayList;
+
 public class BatchListItemsRequest implements Request<BatchListItemsRequest, BatchListItemsResponse> {
 	private static final Logger logger = LoggerFactory.getLogger(BatchListItemsRequest.class);
 
-	private String batchUuid;
+    private int limit;
+    private int offset;
+    private String batchUuid;
 	private Batch.BatchType batchType;
 	
 	public Batch.BatchType getBatchType() {
@@ -32,8 +36,48 @@ public class BatchListItemsRequest implements Request<BatchListItemsRequest, Bat
         return this;
     }
 
+    public int getLimit() {
+        return limit;
+    }
+
+    public BatchListItemsRequest setLimit(int limit) {
+        this.limit = limit;
+        return this;
+    }
+
+    public int getOffset() {
+        return offset;
+    }
+
+    public BatchListItemsRequest setOffset(int offset) {
+        this.offset = offset;
+        return this;
+    }
+
     @Override
     public String getEndpoint() {
+        ArrayList<String> queryStrings = new ArrayList<String>();
+        String queryString = "";
+
+        if (getLimit() != 0) {
+            queryStrings.add("limit=" + getLimit());
+        }
+
+        if (getOffset() != 0) {
+            queryStrings.add("offset=" + getOffset());
+        }
+
+        if (queryStrings.size() > 0) {
+            StringBuilder sb = new StringBuilder(128);
+            int end = 0;
+            for (Object s : queryStrings.toArray()) {
+                sb.append(s);
+                end = sb.length();
+                sb.append("&");
+            }
+            queryString = "?" + sb.substring(0, end);
+        }
+
 		String endpoint = "batches/" + this.batchUuid + "/";
 		
 		switch(batchType) {
@@ -51,7 +95,7 @@ public class BatchListItemsRequest implements Request<BatchListItemsRequest, Bat
 		    
 		}
 		
-		return endpoint;
+		return endpoint + queryString;
 	}
 
     @Override

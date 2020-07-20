@@ -7,37 +7,20 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Properties;
 
-import com.fire.sdk.model.InternalTransfer;
-import com.fire.sdk.model.OrderDetails;
-import com.fire.sdk.model.PaymentRequest;
-import com.fire.sdk.model.PaymentRequestPayment;
-import com.fire.sdk.model.request.PaymentRequestListRequest;
-import com.fire.sdk.model.request.PaymentRequestNewRequest;
-import com.fire.sdk.model.request.PaymentRequestPaymentNewRequest;
-import com.fire.sdk.model.response.PaymentRequestListResponse;
-import com.fire.sdk.model.response.PaymentRequestNewResponse;
-import com.fire.sdk.model.response.PaymentRequestPaymentNewResponse;
+import com.fire.sdk.model.*;
+import com.fire.sdk.model.request.*;
+import com.fire.sdk.model.response.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fire.sdk.http.HttpConfiguration;
-import com.fire.sdk.model.BankTransfer;
 import com.fire.sdk.model.BankTransfer.PayeeType;
-import com.fire.sdk.model.Batch;
-import com.fire.sdk.model.Credentials;
-import com.fire.sdk.model.request.AccountTransactionListRequest;
 import com.fire.sdk.model.request.AccountTransactionListRequest.TransactionTypes;
-import com.fire.sdk.model.request.BatchAddItemRequest;
-import com.fire.sdk.model.request.BatchNewRequest;
-import com.fire.sdk.model.request.BatchSubmitRequest;
-import com.fire.sdk.model.response.AccountTransactionListResponse;
-import com.fire.sdk.model.response.BatchAddItemResponse;
-import com.fire.sdk.model.response.BatchNewResponse;
 
 public class FireBusinessAPITest {
 
 	private static final Logger logger = LoggerFactory.getLogger(FireBusinessAPITest.class);
-	
+
 	public static void main(String[] args) {
 		new FireBusinessAPITest();
 	}
@@ -73,64 +56,29 @@ public class FireBusinessAPITest {
 		
 //		PayeeListResponse payeeList = api.send(new PayeeListRequest());
 //
- 		PaymentRequestListResponse paymentRequestListResponse = api.send(new PaymentRequestListRequest());
-
-		PaymentRequest paymentRequest = new PaymentRequest()
-				.setIcanTo(2152l) // 2150 - EUR, 2152 - GBP
-				.setAmount(10l)
-				.setCurrency("GBP")
-				.setType("PARTY_TO_PARTY")
-				.setDescription("Testing the API")
-				.setMyRef("Test")
-				.setMaxNumberCustomerPayments(1)
-				.setMaxNumberPayments(1)
-				.setReturnUrl("https://forgerock.foursevensix.com/shelterapi/callback")
-				.setOrderDetails(new OrderDetails()
-					.setOrderId("orderid123")
-				)
-				;
-		PaymentRequestNewResponse paymentRequestNewResponse = api.send(new PaymentRequestNewRequest().setPaymentRequest(paymentRequest));
-
-
-
-		HashMap<String, String> aspsps = new HashMap<>();
-		aspsps.put("Allied Irish Bank (GB) - Personal","ff8ab34b-9646-497c-8932-82e93765146d");
-		aspsps.put("Allied Irish Bank (GB) - Business","86f6979f-d4cb-4df8-b609-f7db3a65a203");
-		aspsps.put("Bank of Scotland - Personal","48410f57-28f5-4038-9f3b-ce61b7a59fed");
-		aspsps.put("Bank of Scotland - Business","48410f57-28f5-4038-9f3b-ce61b7a59fee");
-		aspsps.put("Barclays - Personal","105cbaf1-8a49-4c99-8205-928ea4014d9f");
-		aspsps.put("Barclays - Corporate","105cbaf1-8a49-4c99-8205-928ea4014d9d");
-		aspsps.put("Barclays - PingIt","105cbaf1-8a49-4c99-8205-928ea4014d9e");
-		aspsps.put("First Direct","c6cd209c-a123-47ec-b80d-4f2407375870");
-		aspsps.put("First Trust - Corporate","f27d106b-eefd-4a6a-9de7-98f10200abf1");
-		aspsps.put("First Trust - Personal","822fdba9-4732-423b-9cb7-9f56a7648c32");
-		aspsps.put("Halifax","1c1c2a05-35b1-4cad-bd68-e0f17346c03a");
-		aspsps.put("HSBC - Personal","7fdf76d0-c1a2-4e6a-9fe1-a1240feff318");
-		aspsps.put("HSBC - Business","7fdf76d0-c1a2-4e6a-9fe1-a1240feff317");
-		aspsps.put("Lloyds Bank - Personal","fc18e51a-e517-4b97-a188-b230359c53bf");
-		aspsps.put("Lloyds Bank - Business","fc18e51a-e517-4b97-a188-b230359c53be");
-		aspsps.put("M&S Bank","6445b420-0e7d-4b16-9a1f-aa70e5454a1a");
-		aspsps.put("Natwest - Personal","1731af71-1f87-466d-82ea-d974a92d2004");
-		aspsps.put("Natwest - Business","1731af71-1f87-466d-82ea-d974a92d2002");
-		aspsps.put("Nationwide Building Society","7774e08f-a363-42a7-b588-8656fb7b31b2");
-		aspsps.put("Royal Bank of Scotland - Personal","1340a173-ac14-41ed-935a-e6e4fbb2daa0");
-		aspsps.put("Royal Bank of Scotland - Business","1340a173-ac14-41ed-935a-e6e4fbb2daa9");
-		aspsps.put("Santander","eed326d3-546e-4ce8-aa1c-142c1cd69e1e");
-		aspsps.put("Ulster Bank (NI) - Personal","ff5ad722-360f-4a32-833b-bea6c3578a95");
-		aspsps.put("Ulster Bank (NI) - Business","ff5ad722-360f-4a32-833b-bea6c3578a94");
-		aspsps.put("Revolut","36888efe-9e2b-453e-a46f-97c9a17a6953");
-		aspsps.put("Monzo","f6ffa766-2903-4867-a4ed-8a863fa59759");
-		aspsps.put("Mettle","0137c4c4-208c-4c0f-a7d1-aa45f1557431");
-		aspsps.put("Allied Irish Bank - Personal","ff8ab34b-9646-497c-8932-82e937651460");
-		aspsps.put("Ulster Bank (Ireland) - Personal","92431fe7-88af-494a-9bfb-2ec9d6336dd5");
-		aspsps.put("Ulster Bank (Ireland) - Business","92431fe7-88af-494a-9bfb-2ec9d6336dd4");
-		aspsps.put("Permanent TSB","ff8ab34b-9646-497c-8932-82e937651450");
-
-
-		PaymentRequestPaymentNewResponse paymentRequestPaymentNewResponse = api.send(new PaymentRequestPaymentNewRequest()
-				.setPaymentRequestCode(paymentRequestNewResponse.getCode()) // hnejan93 - EUR // wppkqwhc - GBP
-				.setPaymentRequestPayment(new PaymentRequestPayment().setAspspUuid("105cbaf1-8a49-4c99-8205-928ea4014d9f"))
-		);
+// 		PaymentRequestListResponse paymentRequestListResponse = api.send(new PaymentRequestListRequest());
+//
+//		PaymentRequest paymentRequest = new PaymentRequest()
+//				.setIcanTo(2152l) // 2150 - EUR, 2152 - GBP
+//				.setAmount(10l)
+//				.setCurrency("GBP")
+//				.setType("PARTY_TO_PARTY")
+//				.setDescription("Testing the API")
+//				.setMyRef("Test")
+//				.setMaxNumberCustomerPayments(1)
+//				.setMaxNumberPayments(1)
+//				.setReturnUrl("https://forgerock.foursevensix.com/shelterapi/callback")
+//				.setOrderDetails(new OrderDetails()
+//					.setOrderId("orderid123")
+//				)
+//				;
+//		PaymentRequestNewResponse paymentRequestNewResponse = api.send(new PaymentRequestNewRequest().setPaymentRequest(paymentRequest));
+//
+//
+//		PaymentRequestPaymentNewResponse paymentRequestPaymentNewResponse = api.send(new PaymentRequestPaymentNewRequest()
+//				.setPaymentRequestCode(paymentRequestNewResponse.getCode()) // hnejan93 - EUR // wppkqwhc - GBP
+//				.setPaymentRequestPayment(new PaymentRequestPayment().setAspspUuid("105cbaf1-8a49-4c99-8205-928ea4014d9f"))
+//		);
 
 		
 //		AccountTransactionListResponse transactions = null;
@@ -164,9 +112,10 @@ public class FireBusinessAPITest {
 //        
 		
 		
-//		BatchListResponse batches = api.send(new BatchListRequest().setBatchStatuses(new BatchStatus[] { BatchStatus.PENDING_APPROVAL, BatchStatus.PENDING_PARENT_BATCH_APPROVAL }));
-//		logger.info("Batch 0 = {}", batches.getBatches().get(0).getBatchName());
-
+		BatchListResponse batches = api.send(new BatchListRequest()
+				.setBatchTypes(new Batch.BatchType[] { Batch.BatchType.BANK_TRANSFER })
+				.setBatchStatuses(new Batch.BatchStatus[] { Batch.BatchStatus.PENDING_APPROVAL }));
+		logger.info("Batch 0 = {}", batches.getBatches().get(0).getBatchName());
 
 //		BatchNewRequest newBatchRequest = new BatchNewRequest();
 //		newBatchRequest.setBatch(new Batch()
@@ -202,8 +151,20 @@ public class FireBusinessAPITest {
 //		logger.info("New batch item ID = {}", newItem.getBatchItemUuid());
 	
 //		BatchListItemsResponse items = api.send(new BatchListItemsRequest().setBatchUuid(batchUuid).setBatchType(Batch.BatchType.INTERNAL_TRANSFER));
-//		BatchListItemsResponse items = api.send(new BatchListItemsRequest().setBatchUuid(batchUuid).setBatchType(Batch.BatchType.BANK_TRANSFER));
-        
+		BatchListItemsResponse items = api.send(new BatchListItemsRequest()
+				.setLimit(100)
+				.setOffset(0)
+				.setBatchUuid("19FAA08D-FBED-49D7-9530-D3D1318B5835")
+				.setBatchType(Batch.BatchType.BANK_TRANSFER)
+		);
+
+		for (BankTransferBatchItem bankTransferBatchItem : items.getItems()) {
+			System.out.print(bankTransferBatchItem.getDestIban() + "\t");
+			System.out.print(bankTransferBatchItem.getDestAccountHolderName() + "\t");
+			System.out.print(bankTransferBatchItem.getMyRef() + "\t");
+			System.out.print(bankTransferBatchItem.getYourRef() + "\t");
+			System.out.println(bankTransferBatchItem.getAmount() / 100);
+		}
 //		api.send(new BatchSubmitRequest().setBatchUuid(batchUuid));
 		
     
