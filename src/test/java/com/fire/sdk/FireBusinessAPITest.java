@@ -48,6 +48,9 @@ public class FireBusinessAPITest {
 		
 		FireBusinessAPI api = new FireBusinessAPI(config).initialise(credentials);
 
+//		api.send(new AccountListRequest());
+//		api.send(new PayeeListRequest());
+
 //		api.send(new AccountRequest().setAccountId(2150l));
 //		api.send(new AccountActionsRequest().setAccountId(5532l).setAlias("Second Account"));
 		
@@ -149,12 +152,15 @@ public class FireBusinessAPITest {
 //		BatchAddItemResponse newItem = api.send(new BatchAddItemRequest().setBatchUuid(batchUuid).setBatchItem(bankTransfer));
 //		BatchAddItemResponse newItem = api.send(new BatchAddItemRequest().setBatchUuid(batchUuid).setBatchItem(internalTransfer));
 //		logger.info("New batch item ID = {}", newItem.getBatchItemUuid());
-	
+
+
+//        api.send(new BatchListRequest());
+
 //		BatchListItemsResponse items = api.send(new BatchListItemsRequest().setBatchUuid(batchUuid).setBatchType(Batch.BatchType.INTERNAL_TRANSFER));
 		BatchListItemsResponse items = api.send(new BatchListItemsRequest()
-				.setLimit(100)
-				.setOffset(0)
-				.setBatchUuid("19FAA08D-FBED-49D7-9530-D3D1318B5835")
+				.setLimit(10)
+				.setOffset(280)
+				.setBatchUuid("58A22971-29D5-4C7C-839E-5E21B464A668")
 				.setBatchType(Batch.BatchType.BANK_TRANSFER)
 		);
 
